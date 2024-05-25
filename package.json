@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "scripts": {
+    "build": "postcss src/styles.css -o dist/styles.css",
+    "watch": "postcss src/styles.css -o dist/styles.css --watch",
+    "dev": "live-server && npm run watch && npm run build",
+    "start": "npm run dev"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "typescript": "5.4.5"
+  },
+  "devDependencies": {
+    "daisyui": "^4.11.1",
+    "flowbite": "^2.3.0",
+    "live-server": "^1.2.2"
+  }
+}

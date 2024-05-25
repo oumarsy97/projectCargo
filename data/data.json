@@ -1,0 +1,45 @@
+{
+    "cargo": [
+        {
+            "code":20240000001,
+            "distance": 123,
+            "from": "Dakar",
+            "to": "Cotonou",
+            "dateDepart": "2020-01-01",
+            "dateArrive": "2020-01-01",
+            "weight": 1000,
+            "status": "en attente",
+            "statusGlobal": "ouvert",
+            "produits": [
+
+                {
+                    "name": "produit 1",
+                    "quantity": 10
+                }
+                
+
+            ]
+        },{
+            "code":20240000001,
+            "distance": 123,
+            "from": "Dakar",
+            "to": "Cotonou",
+            "dateDepart": "2020-01-01",
+            "dateArrive": "2020-01-01",
+            "weight": 1000,
+            "status": "en attente",
+            "statusGlobal": "ouvert",
+            "produits": [
+
+                {
+                    "name": "produit 1",
+                    "quantity": 10
+                }
+                
+
+            ]
+        }
+
+    ]
+    
+}
