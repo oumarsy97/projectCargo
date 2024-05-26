@@ -76,15 +76,7 @@ cargaison.innerHTML = `
     <div class="flex justify-center w-1/4 sm:hidden md:block bg-orange-300" id="detailcargo">
     <h2>Détail Cargaison</h2>
     </div>
-    <!-- You can open the modal using ID.showModal() method -->
-<dialog id="my_modal_3" class="modal h-auto w-2/4">
-  <div class="modal-box h-[500px]">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-    </form>
-    ${formulaire()}
-  </div>
-</dialog>
+    
    
 `;
 
@@ -98,6 +90,7 @@ const displayDataCargo = () => {
   fetch("../php/data.php")
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       
       data.cargo.forEach((cargo: any) => {
         tbody.innerHTML += ModelCargo(cargo);
@@ -166,55 +159,6 @@ const save = (data: any) => {
 
 
 
-function formulaire() {
-  return `
-  <div class="container mx-auto p-4 form-control">
-  <div>
-   <h2 class="text-2xl font-bold mb-4 text-center">Ajout Cargaison</h2>
-   </div>
-  <form class="form-control" id="formCargo">
-  <div class="mb-4 grid grid-cols-2 gap-4">
-    <div>
-      <label for="from" class="block text-gray-700 text-sm font-bold mb-2">Depart</label>
-      <input type="text" id="from" name="from" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-    </div>
-    <div>
-      <label for="to" class="block text-gray-700 text-sm font-bold mb-2">Arrivée</label>
-      <input type="text" id="to" name="to" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-    </div>
-    
-     <div>
-       <label for="statusGlobal" class="block text-gray-700 text-sm font-bold mb-2">Type de Chargement</label>
-       <select id="statusGlobal" name="statusGlobal" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-         <option value="ferme">poids</option>
-         <option value="ouvert">Nombre de Colis</option>
-       </select>
-     </div>
-     <div>
-       <label for="weight" class="block text-gray-700 text-sm font-bold mb-2">Poids</label>
-       <input type="number" id="weight" name="weight" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-     </div>
-    <div>
-      <label for="departure" class="block text-gray-700 text-sm font-bold mb-2">Date Départ</label>
-      <input type="date" id="departure" name="departure" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-    </div>
-    <div>
-      <label for="destination" class="block text-gray-700 text-sm font-bold mb-2">Date Destination</label>
-      <input type="date" id="destination" name="destination" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-    </div>
-    <div>
-       <label for="distance" class="block text-gray-700 text-sm font-bold mb-2">Distance</label>
-       <input type="number" disabled desable id="distance" name="distance" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
-     </div>
-     </div>
-     <div class="flex items-center justify-center w-full">
-     <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">Ajouter</button>
-     </div>
-     </form>
-   
- `;
-
-}
 
 const formCargo = document.getElementById("formCargo") as HTMLFormElement;
 const submitButton = formCargo.querySelector("button[type='button']") as HTMLButtonElement;
@@ -224,18 +168,21 @@ submitButton.addEventListener("click", (event) => {
   const formData = new FormData(formCargo);
   const data = Object.fromEntries(formData);
 console.log(data);
-  // Your code to handle the form submission goes here
-  let errors = 0
-  for(const [key, value] of Object.entries(formData)) {
-   if(key!="type" && value === "" || value === "0") {
+//parcourir data
+let errors = 0
+for(const [key, value] of Object.entries(data)) {
+    console.log(key, value);
+   if(key!="type" && key != "typeChargement" && value === "" || value === "0") {
        errors = 1
-       let error = key + "-error"
-     const errorElement =  document.getElementById(error) as HTMLFormElement
-     errorElement.classList.add("visible")
-     errorElement.classList.remove("invisible")
-   }else if(key!="type") {
-       let error = key + "-error"
-       const errorElement =  document.getElementById(error) as HTMLFormElement
+       let error = "error-"+key 
+       const errorElement =  document.getElementById(error) as HTMLElement
+       console.log(errorElement);
+
+    //  errorElement.classList.add("visible")
+    //  errorElement.classList.remove("invisible")
+   }else if(key!="type" && key != "typeChargement") {
+       let error = "error-"+key 
+       const errorElement =  document.getElementById(error) as HTMLElement
        errorElement.classList.add("invisible")
        errorElement.classList.remove("visible")
    }
@@ -247,6 +194,20 @@ console.log(data);
 
 });
 
+const typeChargement = document.getElementById("typeChargement") as HTMLSelectElement;
 
+typeChargement.addEventListener("change", (event) => {
+  const typepoids = document.getElementById("typepoids") as HTMLInputElement;
+  const typecolis = document.getElementById("typecolis") as HTMLInputElement;
+  console.log(typeChargement.value);
+ if(typeChargement.value === "colis") {
+   typepoids.classList.add("hidden");
+   typecolis.classList.remove("hidden");
+ }else if(typeChargement.value === "poids") {
+   typepoids.classList.remove("hidden");
+   typecolis.classList.add("hidden");
+ }
+
+});
 
 
