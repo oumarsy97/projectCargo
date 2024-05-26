@@ -1,5 +1,4 @@
-
-
+import { Air, Maritime, Road } from "./Model/cargo.js";
 const cargaison = document.querySelector("#cargaison") as HTMLInputElement;
 console.log(cargaison);
 cargaison.innerHTML = `
@@ -111,22 +110,22 @@ const ModelCargo = (cargo: any) => {
      ${cargo.code}
   </th>
   <td class="px-6 py-4">
-      ${cargo.from}
+      ${cargo._from}
   </td>
   <td class="px-6 py-4">
-      ${cargo.to}
+      ${cargo._to}
   </td>
   <td class="px-6 py-4">
-      ${cargo.dateDepart}
+      ${cargo._dateDepart }
   </td>
   <td class="px-6 py-4">
-      ${cargo.dateDepart}
+      ${cargo._dateArrive }
   </td>
   <td class="px-6 py-4">
-      ${cargo.dateDepart}
+      ${cargo._statusGlobal}
   </td>
   <td class="px-6 py-4">
-      ${cargo.dateDepart}
+      ${cargo._status}
   </td>
   <td class="px-6 py-4">
       <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
@@ -157,7 +156,32 @@ const save = (data: any) => {
   });
 }
 
+const typeChargement = document.getElementById("typeChargement") as HTMLSelectElement;
 
+typeChargement.addEventListener("change", (event) => {
+  const typepoids = document.getElementById("typepoids") as HTMLInputElement;
+  const typecolis = document.getElementById("typecolis") as HTMLInputElement;
+  
+ if(typeChargement.value === "colis") {
+   typepoids.classList.add("hidden");
+   const weight = document.getElementById("weight") as HTMLInputElement;
+   weight.disabled = true;
+ 
+   typecolis.classList.remove("hidden");
+  const nombreColis = document.getElementById("nombreColis") as HTMLInputElement;
+  nombreColis.disabled = false;
+ }else if(typeChargement.value === "poids") {
+   typepoids.classList.remove("hidden");
+   const weight = document.getElementById("weight") as HTMLInputElement;
+   weight.disabled = false;
+
+   typecolis.classList.add("hidden");
+  const nombreColis = document.getElementById("nombreColis") as HTMLInputElement;
+  nombreColis.disabled = true;
+
+ }
+
+});
 
 
 const formCargo = document.getElementById("formCargo") as HTMLFormElement;
@@ -165,49 +189,142 @@ const submitButton = formCargo.querySelector("button[type='button']") as HTMLBut
 
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
+ 
   const formData = new FormData(formCargo);
   const data = Object.fromEntries(formData);
-console.log(data);
-//parcourir data
-let errors = 0
+  //parcourir data
+  let errors = 0
+  console.log(data);
+
+
 for(const [key, value] of Object.entries(data)) {
-    console.log(key, value);
    if(key!="type" && key != "typeChargement" && value === "" || value === "0") {
        errors = 1
-       let error = "error-"+key 
-       const errorElement =  document.getElementById(error) as HTMLElement
-       console.log(errorElement);
-
-    //  errorElement.classList.add("visible")
-    //  errorElement.classList.remove("invisible")
+       let error = ".error-"+key 
+       console.log(error)
+       const errorElement =  document.querySelector(error) as HTMLElement
+     errorElement.classList.add("visible")
+     errorElement.classList.remove("invisible")
    }else if(key!="type" && key != "typeChargement") {
-       let error = "error-"+key 
-       const errorElement =  document.getElementById(error) as HTMLElement
+       let error = ".error-"+key 
+       const errorElement =  document.querySelector(error) as HTMLElement
        errorElement.classList.add("invisible")
        errorElement.classList.remove("visible")
    }
   }
-
+  // const d = new Date();
+  // const a = new Maritime(0,"paris","dakar",d,d,0,0)
+  //  console.log('maritime ', a)
+console.log("errors ",errors)
   if(errors === 0) {
-   let newCos;
+// Convertir les valeurs en chaînes de caractères
+const { type, distance, from, to, departure, weight, destination, weigth, typeChargement, nombreColis } = data;
+const distanceString = typeof distance === 'string' ? distance : String(distance);
+const fromString = typeof from === 'string' ? from : String(from);
+const toString = typeof to === 'string' ? to : String(to);
+const departureString = typeof departure === 'string' ? departure : String(departure).split("T")[0];
+const weightString = typeof weight === 'string' ? weight : String(weight);
+const destinationString = typeof destination === 'string' ? destination : String(destination).split("T")[0];
+const weigthString = typeof weigth === 'string' ? weigth : String(weigth);
+const typeChargementString = typeof typeChargement === 'string' ? typeChargement : String(typeChargement);
+const nombreColisString = typeof nombreColis === 'string' ? nombreColis : String(nombreColis);
+
+   switch(data.type) {
+     case "Maritime":
+     // Créer un objet Maritime avec les valeurs converties
+const m = new Maritime(
+  Number(distanceString),
+  fromString,
+  toString,
+  departureString ,
+  destinationString,
+  Number(weightString),
+  Number(nombreColisString),
+  
+);
+       //recuperer le data
+       fetch("../php/data.php")
+       .then(response => response.json())
+       .then(data => {
+         console.log(data)
+         data.cargo.push(m);
+         save(data);
+         displayDataCargo();
+         // window.location.href = 'index.php';
+         //fermer le modal et effacer le formulaire
+         formCargo.reset();
+         //fermer le modal
+        //  const modal = document.querySelector(".modal");
+
+         
+       })
+       .catch(error => {
+         console.error(error);
+       });
+       break;
+     case "Terrestre":
+       const t = new Road(
+         Number(distanceString),
+         fromString,
+         toString,
+         departureString,
+         destinationString,
+         Number(weightString),
+       );
+      
+       fetch("../php/data.php")
+       .then(response => response.json())
+       .then(data => {
+         console.log(data)
+         data.cargo.push(t);
+         save(data);
+         displayDataCargo();
+         // window.location.href = 'index.php';
+         //fermer le modal et effacer le formulaire
+         formCargo.reset();
+         //fermer le modal
+   
+   })
+       .catch(error => {
+         console.error(error);
+       });
+       break;
+     case "Aerienne":
+       // Créer un objet Aérien avec les valeurs converties
+       const a = new Air(
+         Number(distanceString),
+         fromString,
+         toString,
+         departureString,
+         destinationString,
+         Number(weightString),
+       );
+       //recuperer le data
+       fetch("../php/data.php")
+       .then(response => response.json())
+       .then(data => {
+         console.log(data)
+         data.cargo.push(a);
+         save(data);
+         displayDataCargo();
+         // window.location.href = 'index.php';
+         //fermer le modal et effacer le formulaire 
+         formCargo.reset();
+         //fermer le modal
+       })
+   }
   }
 
-});
-
-const typeChargement = document.getElementById("typeChargement") as HTMLSelectElement;
-
-typeChargement.addEventListener("change", (event) => {
-  const typepoids = document.getElementById("typepoids") as HTMLInputElement;
-  const typecolis = document.getElementById("typecolis") as HTMLInputElement;
-  console.log(typeChargement.value);
- if(typeChargement.value === "colis") {
-   typepoids.classList.add("hidden");
-   typecolis.classList.remove("hidden");
- }else if(typeChargement.value === "poids") {
-   typepoids.classList.remove("hidden");
-   typecolis.classList.add("hidden");
- }
 
 });
 
+// const instance = (cargo: Cargo) => {
+  
+// }
+// const getDate = (D: Date) => {
+//   const date = new Date(D);
+//   const [day, month, year] = date.toISOString().substring(0, 10).split('-');
+//   const formattedDepartureDate = `${day}-${month}-${year}`;
+//   return new Date(formattedDepartureDate);
+// }
 

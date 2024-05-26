@@ -1,5 +1,10 @@
 let x;
 export class Product {
+    _code;
+    _weight;
+    _client;
+    _owner;
+    _status;
     constructor(_code, _weight, _client, _owner, _status = "en attente") {
         this._code = _code;
         this._weight = _weight;
@@ -57,6 +62,7 @@ export class Fragile extends Material {
     }
 }
 export class Chemical extends Product {
+    _toxicity;
     constructor(code, weight, client, owner, _toxicity) {
         super(code, weight, client, owner);
         this._toxicity = _toxicity;
@@ -69,16 +75,29 @@ export class Chemical extends Product {
     }
 }
 export class Cargo {
-    constructor(_code, _distance, _from, _to, _departure, _destination, _weigth, _statusGlobal = "ouvert", _status = "en attente") {
-        this._code = _code;
+    _distance;
+    _from;
+    _to;
+    _dateDepart;
+    _dateArrive;
+    _weigth;
+    _nombreColis;
+    _statusGlobal;
+    _status;
+    static genrerCode = Math.floor(Math.random() * 1000000000);
+    code;
+    static max = 10;
+    constructor(_distance, _from, _to, _dateDepart, _dateArrive, _weigth, _nombreColis, _statusGlobal = "ouvert", _status = "en attente") {
         this._distance = _distance;
         this._from = _from;
         this._to = _to;
-        this._departure = _departure;
-        this._destination = _destination;
+        this._dateDepart = _dateDepart;
+        this._dateArrive = _dateArrive;
         this._weigth = _weigth;
+        this._nombreColis = _nombreColis;
         this._statusGlobal = _statusGlobal;
         this._status = _status;
+        this.code = ++Cargo.genrerCode;
     }
     get distance() {
         return this._distance;
@@ -100,17 +119,17 @@ export class Cargo {
     set to(distance) {
         this._to = distance;
     }
-    get departure() {
-        return this._departure;
+    get dateDepart() {
+        return this._dateDepart;
     }
-    set departure(distance) {
-        this._departure = distance;
+    set dateDepart(distance) {
+        this._dateDepart = distance;
     }
-    get destination() {
-        return this._destination;
+    get dateArrive() {
+        return this.dateArrive;
     }
-    set destination(distance) {
-        this._destination = distance;
+    set dateArrive(distance) {
+        this.dateArrive = distance;
     }
     get weigth() {
         return this._weigth;
@@ -183,10 +202,10 @@ export class Cargo {
         return tr;
     }
 }
-Cargo.max = 10;
 export class Maritime extends Cargo {
-    constructor(code, distance, from, to, departure, destination, weigth, statusGlobal = "ouvert", status = "en attente") {
-        super(code, distance, from, to, departure, destination, weigth, statusGlobal, status);
+    products;
+    constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
+        super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
     }
     addProduct(product) {
@@ -219,8 +238,9 @@ export class Maritime extends Cargo {
     }
 }
 export class Air extends Cargo {
-    constructor(code, distance, from, to, departure, destination, weigth, statusGlobal = "ouvert", status = "en attente") {
-        super(code, distance, from, to, departure, destination, weigth, statusGlobal, status);
+    products;
+    constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
+        super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
     }
     addProduct(product) {
@@ -250,8 +270,9 @@ export class Air extends Cargo {
     }
 }
 export class Road extends Cargo {
-    constructor(code, distance, from, to, departure, destination, weigth, statusGlobal = "ouvert", status = "en attente") {
-        super(code, distance, from, to, departure, destination, weigth, statusGlobal, status);
+    products;
+    constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
+        super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
     }
     addProduct(product) {

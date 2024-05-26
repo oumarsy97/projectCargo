@@ -93,9 +93,13 @@ export class Chemical extends Product {
 type EtatCargo = "en attente" | "en cours" | "arrive" | "recuperer"|"perdu";
 type EtatGlobal = "ferme"|"ouvert";
 export abstract class Cargo {
+  static genrerCode =  Math.floor(Math.random() * 1000000000);
+  private code : number;
   static readonly max: number = 10;
   protected abstract products: Product[];
-  constructor(private _code: number,private _distance: number, private _from:string, private _to:string,private _departure:number,private _destination:number,private _weigth:number,private _statusGlobal:EtatGlobal="ouvert",private _status:EtatCargo="en attente") {}
+  constructor(private _distance: number, private _from:string, private _to:string,private _dateDepart:string,private _dateArrive:string,private _weigth?:number,private _nombreColis?:number,private _statusGlobal:EtatGlobal="ouvert",private _status:EtatCargo="en attente") {
+     this.code = ++Cargo.genrerCode;
+  }
 
   
   get distance(): number {
@@ -121,21 +125,23 @@ export abstract class Cargo {
     this._to = distance;
   }
 
-  get departure(): number {
-    return this._departure;
+  get dateDepart(): string {
+    return this._dateDepart;
   }
-  set departure(distance: number) {
-    this._departure = distance;
+  set dateDepart(distance: string) {
+    this._dateDepart = distance;
   }
-  get destination(): number {
-    return this._destination;
+
+  get dateArrive(): string {
+    return this.dateArrive;
   }
-  set destination(distance: number) {
-    this._destination = distance;
+  set dateArrive(distance: string) {
+    this.dateArrive = distance;
   }
-  get weigth(): number {
+  get weigth(): number|undefined {
     return this._weigth;
   }
+  
   set weigth(distance: number) {
     this._weigth = distance;
   }
@@ -215,8 +221,8 @@ export abstract class Cargo {
 
 export class Maritime extends Cargo {
   products: (Food | Unbreakable | Chemical)[];
-  constructor(code: number,distance: number, from:string, to:string,departure:number,destination:number,weigth:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
-    super(code,distance,from,to,departure,destination,weigth,statusGlobal,status);
+  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
+    super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
     this.products = [];
   }
   addProduct(product: Food | Unbreakable | Chemical): void {
@@ -250,9 +256,9 @@ export class Maritime extends Cargo {
 
 export class Air extends Cargo {
   products: (Food | Material)[];
-  constructor(code: number,distance: number, from:string, to:string,departure:number,destination:number,weigth:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
-    super(code,distance,from,to,departure,destination,weigth,statusGlobal,status);
-      
+  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
+    super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
+       
     this.products = [];
   }
   addProduct(product: Food | Material): void {
@@ -284,9 +290,9 @@ export class Air extends Cargo {
 
 export class Road extends Cargo {
   products: (Food | Material)[];
-  constructor(code: number,distance: number, from:string, to:string,departure:number,destination:number,weigth:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
-    super(code,distance,from,to,departure,destination,weigth,statusGlobal,status);
-     this.products = [];
+  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
+    super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
+       this.products = [];
   }
   addProduct(product: Food | Material): void {
     if (product instanceof Chemical) {

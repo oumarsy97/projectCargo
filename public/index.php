@@ -106,8 +106,8 @@
      </div>
      <div id="typecolis" class="hidden">
        <label for="nombreColis" class="block text-gray-700 text-sm font-bold mb-2">Nombre de Colis</label>
-       <input type="number" id="nombreColis" name="nombreColis" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="0" />
-       <div class="error-weight text-red-500 invisible"> Nombre de Colis est obligatoire</div>
+       <input type="number" id="nombreColis" disabled name="nombreColis" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" min="0" />
+       <div class="error-nombreColis text-red-500 invisible"> Nombre de Colis est obligatoire</div>
      </div>
 
     <div>
@@ -123,11 +123,12 @@
     </div>
 
     <div class="">
-       <label for="distance" class="block text-gray-700 text-sm font-bold mb-2">Distance</label>
-       <input type="number" disabled desable id="distance" name="distance" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+       <label for="distance" class="block text-gray-700 text-sm font-bold mb-1">Distance</label>
+       <input type="number"   id="distance" name="distance" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+       <div class="error-distance text-red-500 invisible"> Distance est obligatoire</div>
      </div>
     </div>
-    <div id="map" style="width: 100%; height: 300px;" class="mb-4"></div>
+    <div id="map" style="width: 100%; height: 290px;" class="mb-2"></div>
      <div class="flex items-center justify-center w-full">
      <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">Ajouter</button>
      </div>
@@ -150,11 +151,11 @@ include "../php/".$page.".php";
  <div id="map" style="width: 40%; height: 400px;"></div>
 
 </main>
-<script src="../dist/script.js"></script>
+<script src="../dist/script.js" type="module"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script>
-    <script>
+    crossorigin=""></script> 
+     <script>
         var map = L.map('map').setView([0, 0], 2);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 18,
@@ -226,8 +227,6 @@ include "../php/".$page.".php";
 
      
        
-
-      //  map.on('click', handleClick2);
     
     </script>
 
