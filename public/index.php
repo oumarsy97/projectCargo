@@ -148,7 +148,6 @@ if(file_exists('../php/'.$page.'.php')) {
 include "../php/".$page.".php";
 }
 ?>
- <div id="map" style="width: 40%; height: 400px;"></div>
 
 </main>
 <script src="../dist/script.js" type="module"></script>
@@ -156,10 +155,12 @@ include "../php/".$page.".php";
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script> 
      <script>
-        var map = L.map('map').setView([0, 0], 2);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 18,
-        }).addTo(map);
+        map = L.map('map').setView([0, 0], 2);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19,
+  attribution: '© OpenStreetMap'
+}).addTo(map);
+
 
 
         var depart;

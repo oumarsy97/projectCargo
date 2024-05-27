@@ -99,6 +99,9 @@ export class Cargo {
         this._status = _status;
         this.code = ++Cargo.genrerCode;
     }
+    get type() {
+        return this._type;
+    }
     get distance() {
         return this._distance;
     }
@@ -204,9 +207,11 @@ export class Cargo {
 }
 export class Maritime extends Cargo {
     products;
+    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
+        this._type = "Maritime";
     }
     addProduct(product) {
         if (product instanceof Fragile) {
@@ -239,9 +244,11 @@ export class Maritime extends Cargo {
 }
 export class Air extends Cargo {
     products;
+    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
+        this._type = "Aerienne";
     }
     addProduct(product) {
         if (product instanceof Chemical) {
@@ -271,9 +278,11 @@ export class Air extends Cargo {
 }
 export class Road extends Cargo {
     products;
+    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
+        this._type = "Terrestre";
     }
     addProduct(product) {
         if (product instanceof Chemical) {

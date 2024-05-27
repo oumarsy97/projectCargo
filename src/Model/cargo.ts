@@ -96,12 +96,17 @@ export abstract class Cargo {
   static genrerCode =  Math.floor(Math.random() * 1000000000);
   private code : number;
   static readonly max: number = 10;
+  protected abstract _type : string;
   protected abstract products: Product[];
   constructor(private _distance: number, private _from:string, private _to:string,private _dateDepart:string,private _dateArrive:string,private _weigth?:number,private _nombreColis?:number,private _statusGlobal:EtatGlobal="ouvert",private _status:EtatCargo="en attente") {
      this.code = ++Cargo.genrerCode;
+     
   }
 
-  
+get type(): string {
+  return this._type;
+}
+
   get distance(): number {
     return this._distance;
 
@@ -221,9 +226,11 @@ export abstract class Cargo {
 
 export class Maritime extends Cargo {
   products: (Food | Unbreakable | Chemical)[];
+  protected _type: string;
   constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
     super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
     this.products = [];
+    this._type = "Maritime";
   }
   addProduct(product: Food | Unbreakable | Chemical): void {
     if (product instanceof Fragile) {
@@ -256,10 +263,12 @@ export class Maritime extends Cargo {
 
 export class Air extends Cargo {
   products: (Food | Material)[];
+  protected _type: string;
   constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
     super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
        
     this.products = [];
+    this._type = "Aerienne";
   }
   addProduct(product: Food | Material): void {
     if (product instanceof Chemical) {
@@ -290,9 +299,11 @@ export class Air extends Cargo {
 
 export class Road extends Cargo {
   products: (Food | Material)[];
+  protected _type: string;
   constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
     super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
        this.products = [];
+    this._type = "Terrestre";
   }
   addProduct(product: Food | Material): void {
     if (product instanceof Chemical) {

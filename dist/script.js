@@ -70,63 +70,53 @@ cargaison.innerHTML = `
                 </td>
             </tr>
         </tbody>
-        <tfoot class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400 fixed bottom-0">
+        
+    </table>
+    <div class="text-xs text-gray-700 uppercase  dark:text-gray-400 fixed bottom-0 flex justify-between w-full">
+        <p></p>
          <nav aria-label="Page navigation example">
           <ul class="flex items-center -space-x-px h-8 text-sm">
             <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Previous</span>
-                <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                </svg>
+              <a href="#" id="first" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                i<
               </a>
             </li>
             <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+              <a href="#" id="prev" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <
+              </a>
             </li>
             <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+              <a href="#" id="next" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                >
+              </a>
             </li>
             <li>
-              <a href="#" aria-current="page" class="z-10 flex items-center justify-center px-3 h-8 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
-            </li>
-            <li>
-              <a href="#" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                <span class="sr-only">Next</span>
-                <svg class="w-2.5 h-2.5 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                </svg>
+              <a href="#" id="last" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                >i
               </a>
             </li>
           </ul>
           </nav>
 
-        </tfoot>
-    </table>
-    
+        </div>
     </div>
     <!-- Détail Cargaison -->
-    <div class="flex justify-center w-1/4 sm:hidden md:block bg-orange-300" id="detailcargo">
+    <div class="flex justify-center w-1/4 h-[200px] sm:hidden md:block bg-blue-300" bg-gray-100 id="detailcargo">
     <h2>Détail Cargaison</h2>
     </div>
     
    
 `;
-const displayDataCargo = () => {
+const displayDataCargo = (itemparpage, page) => {
     const tbody = document.querySelector('tbody');
     console.log(tbody);
     tbody.innerHTML = '';
     fetch("../php/data.php")
         .then(response => response.json())
         .then(data => {
-        console.log(data);
-        data.cargo.forEach((cargo) => {
+        const slice = data.cargo.slice((page - 1) * itemparpage, page * itemparpage);
+        slice.forEach((cargo) => {
             tbody.innerHTML += ModelCargo(cargo);
         });
     })
@@ -134,7 +124,9 @@ const displayDataCargo = () => {
         console.error(error);
     });
 };
-displayDataCargo();
+var itemparpage = 5;
+var page = 1;
+displayDataCargo(itemparpage, page);
 const ModelCargo = (cargo) => {
     return `
   <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
@@ -142,7 +134,7 @@ const ModelCargo = (cargo) => {
      ${cargo.code}
   </th>
   <th scope="row" class="px-6 py-4  text-gray-200 whitespace-nowrap dark:text-white">
-      a faire
+     ${cargo._type}
   </th>
   <td class="px-6 py-4 text-gray-200">
       ${cargo._from}
@@ -256,9 +248,9 @@ submitButton.addEventListener("click", (event) => {
                     .then(response => response.json())
                     .then(data => {
                     console.log(data);
-                    data.cargo.push(m);
+                    data.cargo.unshift(m);
                     save(data);
-                    displayDataCargo();
+                    displayDataCargo(itemparpage, page);
                     // window.location.href = 'index.php';
                     //fermer le modal et effacer le formulaire
                     formCargo.reset();
@@ -275,9 +267,9 @@ submitButton.addEventListener("click", (event) => {
                     .then(response => response.json())
                     .then(data => {
                     console.log(data);
-                    data.cargo.push(t);
+                    data.cargo.unshift(t);
                     save(data);
-                    displayDataCargo();
+                    displayDataCargo(itemparpage, page);
                     // window.location.href = 'index.php';
                     //fermer le modal et effacer le formulaire
                     formCargo.reset();
@@ -295,9 +287,9 @@ submitButton.addEventListener("click", (event) => {
                     .then(response => response.json())
                     .then(data => {
                     console.log(data);
-                    data.cargo.push(a);
+                    data.cargo.unshift(a);
                     save(data);
-                    displayDataCargo();
+                    displayDataCargo(itemparpage, page);
                     // window.location.href = 'index.php';
                     //fermer le modal et effacer le formulaire 
                     formCargo.reset();
@@ -306,20 +298,50 @@ submitButton.addEventListener("click", (event) => {
         }
     }
 });
-const instance = (cargo) => {
-    if (cargo instanceof Air) {
-        return "Air";
-    }
-    else if (cargo instanceof Road) {
-        return "Terrestre";
-    }
-    else if (cargo instanceof Maritime) {
-        return "Maritime";
-    }
-};
 // const getDate = (D: Date) => {
 //   const date = new Date(D);
 //   const [day, month, year] = date.toISOString().substring(0, 10).split('-');
 //   const formattedDepartureDate = `${day}-${month}-${year}`;
 //   return new Date(formattedDepartureDate);
 // }
+//pagination
+const next = document.querySelector("#next");
+next.addEventListener("click", () => {
+    page++;
+    displayDataCargo(itemparpage, page);
+});
+const prev = document.querySelector("#prev");
+prev.addEventListener("click", () => {
+    page--;
+    displayDataCargo(itemparpage, page);
+});
+const displayCargo = (data, itemsPerPage, page) => {
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const tableData = data.slice(startIndex, endIndex);
+};
+const filter = document.querySelector("#search");
+filter.addEventListener("input", (event) => {
+    const value = event.target.value;
+    const tbody = document.querySelector('tbody');
+    //hidden les ligne non correspondant au filtre
+    const rows = tbody.querySelectorAll('tr');
+    rows.forEach((row) => {
+        if (row.textContent?.toLowerCase().includes(value.toLowerCase())) {
+            row.classList.remove('hidden');
+        }
+        else {
+            row.classList.add('hidden');
+        }
+    });
+});
+const m = new Maritime(0, "paris", "dakar", "2022-01-01", "2022-01-01", 0, 0);
+console.log(m);
+const Idexist = (id, data) => {
+    for (const [key, value] of Object.entries(data)) {
+        if (value === id) {
+            return true;
+        }
+    }
+    return false;
+};
