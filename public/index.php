@@ -4,52 +4,52 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../src/css/output.css" rel="stylesheet">
-  <link rel="preload" href="https://tile.openstreetmap.org/13/4093/2722.png" as="image">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-o9N1XYqF1rSA6mo25ybY2TIrrP1l5QfrH1D4Xwl7X8A="crossorigin=""/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-  <link rel="preload" href="https://tile.openstreetmap.org/13/4093/2722.png" as="image">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-o9N1XYqF1rSA6mo25ybY2TIrrP1l5QfrH1D4Xwl7X8A=" crossorigin=""/>
-  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+   <title>Cargo Express</title>
 </head>
 <body>
-<header class="text-gray-600 body-font ">
-  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center shadow-md rounded-lg">
+<header class="text-gray-800 body-font sticky top-0 z-9999 bg-white">
+  <div class="container mx-auto flex flex-wrap p-6 flex-col md:flex-row items-center shadow-md rounded-lg z-10">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
       </svg>
-      <span class="ml-3 text-xl text-red-600 flex items-center gap-4" >
+      <span class="ml-3 text-xl text-blue-600 flex items-center gap-4" >
         
         <font style="vertical-align: inherit; width: 100%;">
-          <font style="vertical-align: inherit;">Cargo Express</font>
+          <font style="vertical-align: inherit; ;" class="font-bold text-xl">Cargo Express</font>
         </font>
-        <input type="text" name="search" id="search" placeholder="Recherche..." class="text-black bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  h-1/2 p-2.5" >
+        <input type="text" name="search" id="search" placeholder="Recherche..." class="text-black bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  h-1/2 p-4" >
       </span>
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-      <a class="mr-5 hover:text-gray-900">
+      <a class="mr-5 hover:text-gray-900 " >
         <form action="" method="post">
           <input type="hidden" name="action" value="dashboard">
-          <input type="submit" value="dashboard">
+          <input type="submit" value="dashboard" class="text-black  font-bold  focus:text-sky-500  text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
         </a>
       <a class="mr-5 hover:text-gray-900">
       <form action="" method="post">
           <input type="hidden" name="action" value="cargaison">
-          <input type="submit" value="Cargaisons">
+          <input type="submit" value="Cargaisons" class="text-black  font-bold   text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
         </form>
       </a>
       <a class="mr-5 hover:text-gray-900">
       <form action="" method="post">
           <input type="hidden" name="action" value="produit">
-          <input type="submit" value="Produits">
+          <input type="submit" value="Produits" class="text-black font-bold  text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
         </form>
       </form>
       </a>
       <a class="mr-5 hover:text-gray-900">
       <form action="" method="post">
           <input type="hidden" name="action" value="client">
-          <input type="submit" value="Clients">
+          <input type="submit" value="Clients" class="text-black  font-bold   text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
         </form>
       </a>
       
@@ -57,15 +57,18 @@
     
   </div>
 </header>
+
 <!-- You can open the modal using ID.showModal() method -->
-<dialog id="my_modal_3" class="modal h-auto w-2/4">
-  <div class="modal-box h-[500px]">
+<dialog id="my_modal_3" class="modal h-auto w-2/4 ">
+  <div class="modal-box h-[500px] w-full">
+    
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
    
   <div class="container mx-auto p-4 form-control">
-  <div>
+  <div class="">
+ 
    <h2 class="text-2xl font-bold mb-4 text-center">Ajout Cargaison</h2>
    </div>
   <form class="form-control" id="formCargo">
@@ -78,6 +81,7 @@
      <option value="Terrestre">Terrestre</option>
      <option value="Aerienne">Aerienne</option>
    </select>
+   
 </div>
 
   <div class="mb-4 grid grid-cols-2 gap-4 mt-4">
@@ -128,14 +132,14 @@
        <div class="error-distance text-red-500 invisible"> Distance est obligatoire</div>
      </div>
     </div>
-    <div id="map" style="width: 100%; height: 290px;" class="mb-2"></div>
+    <div id="map" style="width: 90%; height: 290px;margin-left: 5%;" class="mb-1"></div>
      <div class="flex items-center justify-center w-full">
      <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">Ajouter</button>
      </div>
      </form>
    
   </div>
-
+  
 </dialog>
 <?php
 
@@ -150,77 +154,75 @@ include "../php/".$page.".php";
 ?>
 
 </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="../node_modules/preline/dist/preline.js"></script>
 <script src="../dist/script.js" type="module"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""></script> 
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
      <script>
-        map = L.map('map').setView([0, 0], 2);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  maxZoom: 19,
-  attribution: '© OpenStreetMap'
+      
+       var map = L.map('map').setView([51.505, -0.09], 13);
+       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
-
 
 
         var depart;
         var arrive;
 
         function handleClick(e) {
-          const arriv = document.getElementById('to');
-          const depar = document.getElementById('from');
-          
-            if (!depart || (depar.value == "")) {
-              //effacer dabord le marqueur depart si il y en a un
-              if (depart) {
-                map.removeLayer(depart);
-              }
-                var lat = e.latlng.lat;
-                var lng = e.latlng.lng;
-                var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng;
-                fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    var country = data.address.country;
-                    const depar = document.getElementById('from');
-                    depar.value = country;
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-                var marker = L.marker([lat, lng]).addTo(map);
-                marker.bindPopup('Depart ').openPopup();
-                depart = marker;
-               
-            } else if (!arrive || (arriv.value == "")) {
-              //effacer dabord le marqueur arrive si il y en a un
-              if (arrive) {
-                map.removeLayer(arrive);
-              }
-              var lat = e.latlng.lat;
-                var lng = e.latlng.lng;
-                var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng;
-                fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    var country = data.address.country;
-                    arriv.value = country;
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-            var marker = L.marker([lat, lng]).addTo(map);
-            marker.bindPopup('Arrivee ').openPopup();
-            arrive = marker;
-            }
+    const arriv = document.getElementById('to');
+    const depar = document.getElementById('from');
 
-            calculateDistance();
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        var country = data.address.country || "Inconnu";
+        if (!depart || depar.value === "") {
+          if (depart) map.removeLayer(depart);
+          depar.value = country;
+          depart = L.marker([lat, lng], {icon: L.divIcon({className: 'fas fa-plane-departure text-3xl text-blue-500'})}).addTo(map);
+        } else if (!arrive || arriv.value === "") {
+          if (arrive) map.removeLayer(arrive);
+          arriv.value = country;
+          arrive = L.marker([lat, lng], {icon: L.divIcon({className: 'fas fa-plane-arrival text-3xl text-green-500'})}).addTo(map);
         }
+        if (depart && arrive) {
+          if (line) map.removeLayer(line);
+          var latlngs = [depart.getLatLng(), arrive.getLatLng()];
+          line = L.polyline(latlngs, {color: 'indigo', weight: 3, opacity: 0.7, dashArray: '10, 10'}).addTo(map);
+          map.fitBounds(line.getBounds(), {padding: [50, 50]});
+          var distance = (depart.getLatLng().distanceTo(arrive.getLatLng()) / 1000).toFixed(2);
+          document.getElementById('distance').value = distance;
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
 
         function calculateDistance() {
             var distance = depart.getLatLng().distanceTo(arrive.getLatLng()) / 1000;
            const distanceElement = document.getElementById('distance');
            distanceElement.value = distance.toFixed(2) ;
+        }
+
+        function traceDistance(depart, arrive) {
+          //effacer dabord la ligne si il y en a une
+          if (line) {
+            
+            map.removeLayer(line);
+            line = null;
+          }
+          var distance = depart.getLatLng().distanceTo(arrive.getLatLng()) / 1000;
+          var line = L.polyline([depart.getLatLng(), arrive.getLatLng()], { color: 'red' }).addTo(map);
+          return distance;
         }
 
         map.on('click', handleClick);
@@ -229,8 +231,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
      
        
     
+       
     </script>
-
 
 </body>
 </html>

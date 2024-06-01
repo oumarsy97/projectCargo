@@ -1,0 +1,284 @@
+<section class="text-gray-600 body-font mx-auto px-4 h-full w-full mt-4 flex flex-col items-center justify-center " id="sectionproduit">
+  <header class="bg-blue-600 text-white px-6 py-3   mx-[400px]">
+    <h2 class="text-xl font-semibold flex items-center">
+      <i class="fas fa-box-open mr-2"></i> Enregistrer un produit
+    </h2>
+  </header>
+  <div class="w-full py-3  items-center justify-center " >
+  <form action="" method="post" id="formProduit">
+    <div class="flex gap-2 w-full justify-between mx-40 my-4" id="modal">
+
+    <!-- Info client -->
+      <section class="bg-white shadow-md rounded-lg overflow-hidden w-full ">
+        <header class="bg-blue-600 text-white px-6 py-3">
+          <h2 class="text-xl font-semibold flex items-center">
+            <i class="fas fa-user-circle mr-2"></i> Information du client
+          </h2>
+        </header>
+        <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
+          <div>
+            <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="nomError" class="text-red-500 text-xs mt-1 invisible">Nom est obligatoire</p>
+          </div>
+
+          <div>
+            <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prenom</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prenom" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="prenomError" class="text-red-500 text-xs mt-1 invisible">Prenom est obligatoire</p>
+          </div>
+
+          <div>
+            <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Telephone</label>
+            <input type="number" id="telephone" name="telephone" placeholder="Votre telephone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="telephoneError" class="text-red-500 text-xs mt-1 invisible">telephone est obligatoire</p>
+          </div>
+
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="text" id="email" name="email" placeholder="Votre email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="emailError" class="text-red-500 text-xs mt-1 invisible">email est obligatoire</p>
+          </div>
+
+          <div>
+            <label for="addressClient" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+            <input type="text" id="addressClient" name="addressClient" placeholder="Votre addressClient" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="addressClientError" class="text-red-500 text-xs mt-1 invisible">addresse est obligatoire</p>
+          </div>
+        </div>
+      </section>
+      <!-- Info destinataire -->
+      <section class="bg-white shadow-md rounded-lg overflow-hidden w-full">
+        <header class="bg-blue-600 text-white px-6 py-3">
+          <h2 class="text-xl font-semibold flex items-center">
+            <i class="fas fa-truck-moving mr-2"></i> Information du destinataire
+          </h2>
+        </header>
+        <div class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
+          <div>
+            <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="nomError" class="text-red-500 text-xs mt-1 invisible">Nom est obligatoire</p>
+          </div>
+
+          <div>
+            <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prenom</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Votre prenom" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="prenomError" class="text-red-500 text-xs mt-1 invisible">Prenom est obligatoire</p>
+          </div>
+
+          <div>
+            <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Telephone</label>
+            <input type="text" id="telephone" name="telephone" placeholder="Votre telephone" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="telephoneError" class="text-red-500 text-xs mt-1 invisible">telephone est obligatoire</p>
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="text" id="email" name="email" placeholder="Votre email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="emailError" class="text-red-500 text-xs mt-1 invisible">email est obligatoire</p>
+          </div>
+
+          <div>
+            <label for="addressDestinataire" class="block text-sm font-medium text-gray-700 mb-1">Address</label>
+            <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="addressDestinataireError" class="text-red-500 text-xs mt-1 invisible">addresse est obligatoire</p>
+          </div>
+        </div>
+      </section>
+            
+    </div>
+       <!-- Info produit -->
+       <section class="bg-white shadow-md rounded-lg overflow-hidden">
+        <header class="bg-purple-600 text-white px-6 py-4">
+          <h2 class="text-xl font-semibold flex items-center">
+            <i class="fas fa-box-open mr-2"></i> Information du produit
+          </h2>
+        </header>
+        <div class="p-4 space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="typeproduit" class="block text-sm font-medium text-gray-700 mb-1">Type de produit</label>
+              <select id="typeproduit" name="typeproduit" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+                <option value="food">Alimentaire</option>
+                <option value="chimique">Chimique</option>
+                <option value="incassable">Incassable</option>
+                <option value="fragile">Fragile</option>
+              </select>
+            </div>
+            <div>
+              <label for="libelle" class="block text-sm font-medium text-gray-700 mb-1">Libellé</label>
+              <input type="text" id="libelle" name="libelle" placeholder="Nom du produit" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <p id="libelleError" class="text-red-500 text-xs mt-1 hidden">Libellé est obligatoire</p>
+            </div>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="poids" class="block text-sm font-medium text-gray-700 mb-1">Poids (kg)</label>
+              <input type="number" id="poids" name="poids" min="1" placeholder="0" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <p id="poidsError" class="text-red-500 text-xs mt-1 hidden">Poids est obligatoire</p>
+            </div>
+            <div id="divDegre" class="">
+              <label for="deges" class=" text-sm font-medium text-gray-700 mb-1 hidden">Degré de toxicité (1-10)</label>
+              <input type="number" id="deges" name="deges" min="1" max="10" placeholder="1" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500">
+              <p id="degesError" class="text-red-500 text-xs mt-1 hidden">Degré est obligatoire</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="p-4 ">
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="button" id="addproduit">Valider</button>   
+      </div>
+    </form> 
+  </div>
+  <form action="" method="post" id="ccargo" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 hidden">
+    <div id="choiceCargo" class="mt-4 w-full">
+      <div class="mb-4 flex justify-between items-center">
+        <label class="block text-gray-700 text-sm font-bold mb-2">Veuillez choisir la cargaison ou taper le code</label>
+        <input type="number" name="code" id="codecherch" placeholder="Entrez le code" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-1/2">
+      </div>
+      <table class="table-auto w-full border-collapse border border-gray-200">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="px-4 py-2 text-left font-medium text-gray-600">Code</th>
+            <th class="px-4 py-2 text-left font-medium text-gray-600">Type</th>
+            <th class="px-4 py-2 text-left font-medium text-gray-600">Poids</th>
+            <th class="px-4 py-2 text-left font-medium text-gray-600">Nombre de colis</th>
+            <th class="px-4 py-2 text-left font-medium text-gray-600">Lieu de Départ</th>
+            <th class="px-4 py-2 text-left font-medium text-gray-600">Lieu de Destination</th>
+            <th class="px-4 py-2 text-right font-medium text-gray-600">Action</th>
+          </tr>
+        </thead>
+        <tbody id="selectcargaison" class="divide-y divide-gray-200">
+          <!-- Les lignes du tableau seront générées dynamiquement ici -->
+        </tbody>
+      </table>
+      <div class="mt-4" id="frais">
+        <h2 class="text-lg font-medium text-gray-800">Frais Produit</h2>
+        <p id="fraisproduit" class="text-gray-600"></p>
+      </div>
+    </div>
+    <button class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="adcargo">Enregistrer</button>
+  </form>
+</section>
+<section class="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 hidden" id="sectiondetails">
+  
+  <div class="w-full">
+    <div class="lg:col-span-2">
+      <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+        <div class="flex items-center justify-between px-8 py-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
+          <div>
+            <h2 class="text-2xl font-bold">#code324</h2>
+          </div>
+          <select id="statusSelect" class="bg-gradient-to-r from-blue-500 to-indigo-600 bg-opacity-20 text-blue-500 px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-white">
+            <option value="en_attente">En Attente</option>
+            <option value="en_route" selected>En Route</option>
+            <option value="livre">Livré</option>
+          </select>
+        </div>
+        <div class="p-8">
+          <div class="flex items-center space-x-6 text-gray-700">
+            <div class="flex-1">
+              <p class="text-sm uppercase tracking-wide text-gray-500">Départ</p>
+              <p class="mt-1 font-semibold"><i class="fas fa-map-marker-alt mr-2"></i>paris</p>
+              <p class="mt-1 font-semibold"><i class="fas fa-clock mr-2"></i>28 Mai 2024</p>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm uppercase tracking-wide text-gray-500">Arrivée</p>
+              <p class="mt-1 font-semibold"><i class="fas fa-map-marker-alt mr-2"></i>Dakar</p>
+              <p class="mt-1 font-semibold"><i class="fas fa-clock mr-2"></i>31 Mai 2024</p>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm uppercase tracking-wide text-gray-500">Distance</p>
+              <p class="mt-1 font-semibold">418.47 km</p>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm uppercase tracking-wide text-gray-500">statut</p>
+              <span class="px-3 py-1 bg-green-500 text-white rounded-full text-sm font-medium">Ouvert</span>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm uppercase tracking-wide text-gray-500">Etat</p>
+              <p class="mt-1 font-semibold">en attent</p>
+            </div>
+            <div class="flex-1">
+              <p class="text-sm uppercase tracking-wide text-gray-500">Action</p>
+              <select name="statut" id="statut" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                <option value="en_route">En Route</option>
+                <option value="livre">Livré</option>
+                <option value="en_attente" selected>En Attente</option>  
+                <option value="arrive">Arrive</option>
+                <option value="perdu">Perdu</option>
+
+              </select>
+            </div>
+          </div>
+
+          <hr class="my-8 border-gray-200">
+
+          <h3 class="text-2xl font-bold text-gray-800 mb-6">Produits</h3>
+          <div class="space-y-6">
+            
+            <div class="bg-gray-50 rounded-xl p-6 shadow-md">
+             
+              <div class="flex items-center justify-between gap-4 text-gray-600">
+                <div>
+                  <p class="text-sm text-gray-500">libele</p>
+                  <p class="font-medium">Coco</p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">Type</p>
+                  <p class="font-medium">Alimentaire</p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">Client</p>
+                  <p class="font-medium">Sy Oumar</p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">Poids</p>
+                  <p class="font-medium">45 kg</p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">Propriétaire</p>
+                  <p class="font-medium">Diop Fallou</p>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">etat</p>
+                  <span class="px-3 py-1 bg-green-500 text-white rounded-full text-sm font-medium">En Attente</span>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-500">Action</p>
+                  <select  name="etat" id="" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md p-2 bg-gray-100 text-gray-700">
+                    <option value="en_attente" selected>En Attente</option>
+                    <option value="en_cours" >En Cours</option>
+                    <option value="arrivee">Arrivée</option>
+                    <option value="perdu">Perdu</option>
+                  </select>
+                </div>
+                
+                
+              </div>
+            </div>
+            <!-- Répétez ce bloc pour d'autres produits -->
+            <button class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="btnResult">mise à jour</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  </section>
+<script>
+  document?.getElementById('etatSelect')?.addEventListener('change', function() {
+    let badge = document.getElementById('statusBadge');
+    badge.textContent = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+    badge.classList.toggle('bg-green-500', this.value === 'ouvert');
+    badge.classList.toggle('bg-red-500', this.value === 'ferme');
+  });
+</script>
+</div>
+
+
+    

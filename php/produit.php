@@ -1,8 +1,6 @@
 <?php
-echo "<div class='container' id='produit'>
+$cargo = $data['cargo'] = file_get_contents('../data/data.json');
 
-<h1>Produit</h1>
-
-</div>";
+include_once '../src/views/produit.php.html';
 
 ?>

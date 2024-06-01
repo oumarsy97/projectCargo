@@ -1,0 +1,137 @@
+<main class="text-gray-600 body-font mx-10 h-full mt-4 flex gap-10" id="cargaison">
+    <div class="w-full h-full flex flex-col gap-4">
+        <div class="w-full h-full flex flex-col gap-4">
+            <h2 class="text-2xl font-bold text-center">Liste des Cargaison</h2>
+        </div>
+        <div class="flex justify-between ">
+            <div class="flex gap-2">
+                <select class="select select-bordered w-1/5 h-[60px] p-2 rounded-lg max-w-xs" id="typecargo">
+                    <option disabled selected>Filter</option>
+                    <option value="Maritime">Maritime</option>
+                    <option value="Aerienne">Aerienne</option>
+                    <option value="Terrestre">Terrestre</option>
+                </select>
+                <select class="select select-bordered w-1/5 h-[60px] p-2 rounded-lg max-w-xs" id="etat">
+                    <option disabled selected>Filter</option>
+                    <option value="ouvert">Ouvert</option>
+                    <option value="fermé">Fermé</option>
+                </select>
+                <input type="text" placeholder="Search..." class="input input-bordered w-1/5 h-[60px] p-2 rounded-lg max-w-xs" id="searchmultipleinput">
+                <div id="filtersContainer" class="flex"></div>
+            </div>
+            <button class="font-bold text-blue-600 dark:text-blue-500 hover:underline" id="btnaddCargo" onclick="my_modal_3.showModal()">
+                <i class="fa-regular fa-square-plus"></i> Ajouter une Cargaison
+            </button>
+        </div>
+        <!-- les filtres -->
+        <div>
+        <table class="w-full text-xl text-left rtl:text-right text-gray-500 dark:text-gray-400 mr-10  bottom-1 rounded-md">
+            <thead class="text-xl  text-center text-gray-900  bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3">Code</th>
+                    <th scope="col" class="px-6 py-3">Type</th>
+                    <th scope="col" class="px-6 py-3">From</th>
+                    <th scope="col" class="px-6 py-3">To</th>
+                    <th scope="col" class="px-6 py-3">DateDepart</th>
+                    <th scope="col" class="px-6 py-3">DateArrive</th>
+                    <th scope="col" class="px-6 py-3">Status</th>
+                    <th scope="col" class="px-6 py-3">Step</th>
+                    <th scope="col" class="px-6 py-3">Progess</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($donnee as $cargo) : ?>
+                    <tr class="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600 border-b-2">
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?php echo $cargo['code']; ?></th>
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?php echo $cargo['_type']; ?></th>
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"><?= $cargo['_from']; ?></td>
+                        <td class="px-6 py-4"><?=  $cargo['_to']; ?></td>
+                        <td class="px-6 py-4"><?= $cargo['_dateDepart']; ?></td>
+                        <td class="px-6 py-4"><?= $cargo['_dateArrive']; ?></td>
+                        <td class="px-6 py-4 flex items-center justify-center"><img src="<?= $cargo['_statusGlobal'] =='ouvert' ? 'https://cdn-icons-png.flaticon.com/128/9069/9069952.png' : 'https://cdn-icons-png.flaticon.com/128/4503/4503969.png'; ?>" alt="" class="w-5 h-5"></td>
+                        <td class="px-6 py-4 text-center"><?= $cargo['_status']; ?></td>
+                        <td class="px-6 py-4 flex items-center justify-center">
+                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><i class="fa-solid fa-circle-info"></i></a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+       <div class="text-xs relative text-gray-700 uppercase dark:text-gray-400  -mt-4 flex justify-between w-full">
+           <p></p>
+           <nav aria-label="Page navigation example" class="static -mt-12">
+           <ul class="flex items-center -space-x-px h-8 text-sm" id="pagination">
+            <?php for ($i = 1; $i <= $totalpage; $i++) : ?>
+            <li>
+                <a href="#" id="page-<?=$i?>" class="flex items-center justify-center px-3 h-8  text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white ${i == page ? 'bg-blue-500 text-white' : ''}">
+                  <?=$i?>
+                </a>
+              </li>
+            <?php endfor; ?>
+           </ul>
+           </nav>
+           </div>
+           </div>
+             
+        </div>
+       
+        <div class="flex items-center ">
+            <div class="relative">
+              <div class="absolute -left-5 h-full w-6 border-t-2 border-r-2 border-gray-500 rotate-45"></div>
+            </div>
+            <div class="h-full w-1 bg-gray-500 mx-4"></div>
+            <div>
+              <!-- Votre contenu ici -->
+
+            </div>
+          </div>
+           <!-- Détail Cargaison -->
+           <div class="flex justify-center w-1/4 h-[200px] sm:hidden md:block " bg-gray-100 id="detailcargo">
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+            <div class=" shadow-md rounded-md p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="text-gray-500 text-xl font-bold">Code: 959802985</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 bg-sky-300">
+                   
+                    <div>
+                        <p class="text-gray-600"><i class="fas fa-map-marker-alt text-blue-500" style="color: blue;"></i> De:</p>
+                        <p class="font-semibold">Mauritanie</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><i class="fas fa-map-marker-alt" style="color: blue;"></i> À:</p>
+                        <p class="font-semibold">États-Unis d'Amérique</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><i class="fas fa-calendar-alt" style="color: blue;"></i> Date de départ:</p>
+                        <p class="font-semibold">01/06/2024</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><i class="fas fa-calendar-alt" style="color: blue;"></i> Date d'arrivée prévue:</p>
+                        <p class="font-semibold">08/06/2024</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><i class="fas fa-road text-blue-500" style="color: blue;"></i> Distance:</p>
+                        <p class="font-semibold">9614.9 km</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><i class="fas fa-weight-hanging" style="color: blue;"></i> Poids:</p>
+                        <p class="font-semibold">43 tonnes</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><i class="fas fa-box" style="color: blue;"></i> Statut global:</p>
+                        <p class="font-semibold"></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-600"><i class="fas fa-box" style="color: blue;"></i> Statut:</p>
+                        <p class="font-semibold">En attente</p>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <p class="text-gray-600"><i class="fas fa-ship" style="color: blue;"></i> Type de transport:</p>
+                    <p class="font-semibold">Maritime</p>
+                </div>
+            </div>
+            
+           </div>

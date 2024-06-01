@@ -1,7 +1,10 @@
 <?php
-echo "<main class='text-gray-600 body-font mx-10 h-full mt-4 flex gap-10' id='cargaison'> 
-<h1>Cargaison</h1>
-";
-
-
-?>
+// Récupérer les données JSON à partir du fichier
+$data = file_get_contents('../data/data.json');
+// Décodez les données JSON en tableau PHP
+$data = json_decode($data, true);
+$page = 1;
+$itempage = 3;
+$totalpage = ceil(count($data['cargo'])/$itempage);
+$donnee = array_slice($data['cargo'],($page-1)*$itempage, $itempage);
+include_once '../src/views/cargo.php.html';

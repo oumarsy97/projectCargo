@@ -1,7 +1,7 @@
-type ToxicityRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+export type ToxicityRange = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 let x: (number | string)[];
 
-interface owner {
+export interface owner {
   name: string;
   username: string;
   email?: string;
@@ -12,12 +12,31 @@ interface owner {
 
 type EtatColis = "en attente" | "en cours" | "arrive" | "recuperer"|"perdu"|"archive"|"annule";
 export abstract class Product {
-  constructor(protected _code: number, protected _weight: number,protected _client : owner,protected _owner: owner,protected _status:EtatColis="en attente") {}
-  get name(): number {
-    return this._code;
+  protected code: number;
+  protected abstract type: string;
+  constructor(protected _libelle: string, protected _weight: number,protected _client : owner,protected _owner: owner,protected _status:EtatColis="en attente") {
+    this.code = ++Cargo.genrerCode;
   }
-  set name(value: number) {
-    this._code = value;
+  get Code(): number {
+    return this.code;
+  }
+  set Code(value: number) {
+    this.code = value;
+  }
+
+  get status(): EtatColis {
+    return this._status;
+  }
+  set status(value: EtatColis) {
+    this._status = value;
+  }
+  
+
+  get libelle(): string {
+    return this._libelle;
+  }
+  set libelle(value: string) {
+    this._libelle = value;
   }
 
   get weight(): number {
@@ -46,40 +65,49 @@ export abstract class Product {
   
   //
   info(): void {
-    console.log(`Name: ${this.name}, Weight: ${this.weight}`);
+    console.log(`Name: ${this.code}, Weight: ${this.weight}`);
   }
 }
 
 export class Food extends Product {
-  constructor(code: number, weight: number,client : owner, owner: owner) {
-    super(code, weight, client,owner);
+  protected type: string;
+  constructor( libelle: string, weight: number,client : owner, owner: owner, _status = "en attente") {
+    super(libelle, weight, client,owner);
+    this.type = "food";
    
   }
 }
 
 export abstract class Material extends Product {
-  constructor(code: number, weight: number,client : owner, owner: owner) {
-    super(code, weight, client,owner);
+  constructor(libelle : string, weight: number,client : owner, owner: owner, _status = "en attente") {
+    super(libelle, weight, client,owner);
 
   }
 }
 
 export class Unbreakable extends Material {
-  constructor(code: number, weight: number,client : owner, owner: owner) {
-    super(code, weight, client,owner);
+  protected type: string;
+  constructor(libelle : string, weight: number,client : owner, owner: owner, _status = "en attente") {
+    super( libelle, weight, client,owner);
+    this.type = "unbreakable";
   }
 }
 
 export class Fragile extends Material {
-  constructor(code: number, weight: number,client : owner, owner: owner) {
-    super(code, weight, client,owner);
+  protected type: string;
+  constructor(libelle : string, weight: number,client : owner, owner: owner, _status = "en attente") {
+    super( libelle, weight, client,owner);
+    this.type = "fragile";
   
   }
 }
 
 export class Chemical extends Product {
-  constructor(code: number, weight: number,client : owner, owner: owner, private _toxicity: ToxicityRange) {
-    super(code, weight ,client,owner);
+  protected type: string;
+  constructor(libelle : string, weight: number,client : owner, owner: owner, private _toxicity: ToxicityRange, _status = "en attente") {
+    super(libelle, weight, client,owner);
+    this.type = "chemical";
+
   }
   get toxicity(): ToxicityRange {
     return this._toxicity;
@@ -88,19 +116,31 @@ export class Chemical extends Product {
     this._toxicity = value;
   }
 }
-
+const Idexist = (id: number, data: { [key: string]: number }) => {
+  for (const [key, value] of Object.entries(data)) {
+    if (value === id) {
+      return true;
+    }
+  }
+  return false;
+}
 //================================================================
-type EtatCargo = "en attente" | "en cours" | "arrive" | "recuperer"|"perdu";
-type EtatGlobal = "ferme"|"ouvert";
+export type EtatCargo = "en attente" | "en cours" | "arrive" |"perdu";
+export type EtatGlobal = "ferme"|"ouvert";
 export abstract class Cargo {
-  static genrerCode =  Math.floor(Math.random() * 1000000000);
+  static genrerCode =  Math.floor(Math.random() * 1000000000) + 2000000000;
   private code : number;
-  static readonly max: number = 10;
   protected abstract _type : string;
   protected abstract products: Product[];
-  constructor(private _distance: number, private _from:string, private _to:string,private _dateDepart:string,private _dateArrive:string,private _weigth?:number,private _nombreColis?:number,private _statusGlobal:EtatGlobal="ouvert",private _status:EtatCargo="en attente") {
+  constructor(protected _distance: number, protected _from:string, protected _to:string,protected _dateDepart:string,protected _dateArrive:string,protected _weigth?:number,protected _nombreColis?:number,protected _statusGlobal:EtatGlobal="ouvert",protected _status:EtatCargo="en attente") {
      this.code = ++Cargo.genrerCode;
-     
+
+  }
+  get Code(): number {
+    return this.code;
+  }
+  set Code(value: number) {
+    this.code = value;
   }
 
 get type(): string {
@@ -119,49 +159,62 @@ get type(): string {
   get from(): string {
     return this._from;
   }
-  set from(distance: string) {
-    this._from = distance;
+  set from(from: string) {
+    this._from = from;
   }
   //
   get to(): string {
     return this._to;
   }
-  set to(distance: string) {
-    this._to = distance;
+  set to(to: string) {
+    this._to = to;
   }
 
   get dateDepart(): string {
     return this._dateDepart;
   }
-  set dateDepart(distance: string) {
-    this._dateDepart = distance;
+  set dateDepart(depart: string) {
+    this._dateDepart = depart;
   }
 
   get dateArrive(): string {
     return this.dateArrive;
   }
-  set dateArrive(distance: string) {
-    this.dateArrive = distance;
+  set dateArrive(arrive: string) {
+    this.dateArrive = arrive;
   }
   get weigth(): number|undefined {
     return this._weigth;
   }
   
-  set weigth(distance: number) {
-    this._weigth = distance;
+  set weigth(weigth: number) {
+    this._weigth = weigth;
   }
 
   get statusGlobal(): EtatGlobal {
     return this._statusGlobal;
   }
-  set statusGlobal(distance: EtatGlobal) {
-    this._statusGlobal = distance;
+  set statusGlobal(statusg: EtatGlobal) {
+    this._statusGlobal = statusg;
   }
   get status(): EtatCargo {
     return this._status;
   }
-  set status(distance: EtatCargo) {
-    this._status = distance;
+  set status(status: EtatCargo) {
+    this._status = status;
+  }
+  get nombreColis(): number|undefined {
+    return this._nombreColis;
+  }
+
+  set nombreColis(_nombreColis: number) {
+    this._nombreColis = this._nombreColis;
+  }
+  set setProducts(products: Product[]) {
+    this.products = products;
+  }
+  get getProducts(): Product[] {
+    return this.products;
   }
 
   //
@@ -175,6 +228,12 @@ get type(): string {
     // return total;
     return this.products.reduce(
       (total, product) => total + this.calculateAmount(product),
+      0
+    );
+  }
+  claculPoids(): number {
+    return this.products.reduce(
+      (total, product) => total + product.weight,
       0
     );
   }
@@ -227,7 +286,7 @@ get type(): string {
 export class Maritime extends Cargo {
   products: (Food | Unbreakable | Chemical)[];
   protected _type: string;
-  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
+  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth?:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
     super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
     this.products = [];
     this._type = "Maritime";
@@ -237,7 +296,7 @@ export class Maritime extends Cargo {
       console.log("Impossible to add");
       return;
     }
-    if (this.products.length === Maritime.max) {
+    if ((( this.nombreColis != null) && this.products.length == this.nombreColis) || (this.weigth != null && this.weigth - this.claculPoids()<product.weight)) {
       console.log("Impossible d'ajouter la cargaison est pleine!");
       return;
     }
@@ -257,14 +316,14 @@ export class Maritime extends Cargo {
       amount = 90 * product.weight * this.distance + 5000;
     }
 
-    return amount;
+    return amount>10000?amount:10000;
   }
 }
 
 export class Air extends Cargo {
   products: (Food | Material)[];
   protected _type: string;
-  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
+  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth?:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
     super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
        
     this.products = [];
@@ -275,7 +334,7 @@ export class Air extends Cargo {
       console.log("Impossible to add");
       return;
     }
-    if (this.products.length === Air.max) {
+    if ((( this.weigth !=null) && product.weight > this.weigth - this.claculPoids()) || ((this.weigth != null && this.weigth - this.claculPoids()<product.weight))) {
       console.log("Impossible d'ajouter la cargaison est pleine!");
       return;
     }
@@ -293,14 +352,14 @@ export class Air extends Cargo {
       amount = 1000 * product.weight * this.distance;
     }
 
-    return amount;
+    return amount>10000?amount:10000;
   }
 }
 
 export class Road extends Cargo {
   products: (Food | Material)[];
   protected _type: string;
-  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
+  constructor(distance: number, from:string, to:string,dateDepart:string,dateArrive:string,weigth?:number,nombreColis?:number,statusGlobal:EtatGlobal="ouvert",status:EtatCargo="en attente") {
     super(distance,from,to,dateDepart,dateArrive,weigth,nombreColis,statusGlobal,status);
        this.products = [];
     this._type = "Terrestre";
@@ -310,7 +369,7 @@ export class Road extends Cargo {
       console.log("Impossible to add");
       return;
     }
-    if (this.products.length === Road.max) {
+    if (( this.products.length == this?.nombreColis )|| (this.weigth != null && this.weigth - this.claculPoids()<product.weight)) {
       console.log("Impossible d'ajouter la cargaison est pleine!");
       return;
     }
@@ -324,6 +383,6 @@ export class Road extends Cargo {
       amount = 200 * product.weight * this.distance;
     }
 
-    return amount;
+    return amount>10000?amount:10000;
   }
 }

@@ -1,22 +1,30 @@
 let x;
 export class Product {
-    _code;
-    _weight;
-    _client;
-    _owner;
-    _status;
-    constructor(_code, _weight, _client, _owner, _status = "en attente") {
-        this._code = _code;
+    constructor(_libelle, _weight, _client, _owner, _status = "en attente") {
+        this._libelle = _libelle;
         this._weight = _weight;
         this._client = _client;
         this._owner = _owner;
         this._status = _status;
+        this.code = ++Cargo.genrerCode;
     }
-    get name() {
-        return this._code;
+    get Code() {
+        return this.code;
     }
-    set name(value) {
-        this._code = value;
+    set Code(value) {
+        this.code = value;
+    }
+    get status() {
+        return this._status;
+    }
+    set status(value) {
+        this._status = value;
+    }
+    get libelle() {
+        return this._libelle;
+    }
+    set libelle(value) {
+        this._libelle = value;
     }
     get weight() {
         return this._weight;
@@ -38,34 +46,37 @@ export class Product {
     }
     //
     info() {
-        console.log(`Name: ${this.name}, Weight: ${this.weight}`);
+        console.log(`Name: ${this.code}, Weight: ${this.weight}`);
     }
 }
 export class Food extends Product {
-    constructor(code, weight, client, owner) {
-        super(code, weight, client, owner);
+    constructor(libelle, weight, client, owner, _status = "en attente") {
+        super(libelle, weight, client, owner);
+        this.type = "food";
     }
 }
 export class Material extends Product {
-    constructor(code, weight, client, owner) {
-        super(code, weight, client, owner);
+    constructor(libelle, weight, client, owner, _status = "en attente") {
+        super(libelle, weight, client, owner);
     }
 }
 export class Unbreakable extends Material {
-    constructor(code, weight, client, owner) {
-        super(code, weight, client, owner);
+    constructor(libelle, weight, client, owner, _status = "en attente") {
+        super(libelle, weight, client, owner);
+        this.type = "unbreakable";
     }
 }
 export class Fragile extends Material {
-    constructor(code, weight, client, owner) {
-        super(code, weight, client, owner);
+    constructor(libelle, weight, client, owner, _status = "en attente") {
+        super(libelle, weight, client, owner);
+        this.type = "fragile";
     }
 }
 export class Chemical extends Product {
-    _toxicity;
-    constructor(code, weight, client, owner, _toxicity) {
-        super(code, weight, client, owner);
+    constructor(libelle, weight, client, owner, _toxicity, _status = "en attente") {
+        super(libelle, weight, client, owner);
         this._toxicity = _toxicity;
+        this.type = "chemical";
     }
     get toxicity() {
         return this._toxicity;
@@ -74,19 +85,15 @@ export class Chemical extends Product {
         this._toxicity = value;
     }
 }
+const Idexist = (id, data) => {
+    for (const [key, value] of Object.entries(data)) {
+        if (value === id) {
+            return true;
+        }
+    }
+    return false;
+};
 export class Cargo {
-    _distance;
-    _from;
-    _to;
-    _dateDepart;
-    _dateArrive;
-    _weigth;
-    _nombreColis;
-    _statusGlobal;
-    _status;
-    static genrerCode = Math.floor(Math.random() * 1000000000);
-    code;
-    static max = 10;
     constructor(_distance, _from, _to, _dateDepart, _dateArrive, _weigth, _nombreColis, _statusGlobal = "ouvert", _status = "en attente") {
         this._distance = _distance;
         this._from = _from;
@@ -98,6 +105,12 @@ export class Cargo {
         this._statusGlobal = _statusGlobal;
         this._status = _status;
         this.code = ++Cargo.genrerCode;
+    }
+    get Code() {
+        return this.code;
+    }
+    set Code(value) {
+        this.code = value;
     }
     get type() {
         return this._type;
@@ -112,45 +125,57 @@ export class Cargo {
     get from() {
         return this._from;
     }
-    set from(distance) {
-        this._from = distance;
+    set from(from) {
+        this._from = from;
     }
     //
     get to() {
         return this._to;
     }
-    set to(distance) {
-        this._to = distance;
+    set to(to) {
+        this._to = to;
     }
     get dateDepart() {
         return this._dateDepart;
     }
-    set dateDepart(distance) {
-        this._dateDepart = distance;
+    set dateDepart(depart) {
+        this._dateDepart = depart;
     }
     get dateArrive() {
         return this.dateArrive;
     }
-    set dateArrive(distance) {
-        this.dateArrive = distance;
+    set dateArrive(arrive) {
+        this.dateArrive = arrive;
     }
     get weigth() {
         return this._weigth;
     }
-    set weigth(distance) {
-        this._weigth = distance;
+    set weigth(weigth) {
+        this._weigth = weigth;
     }
     get statusGlobal() {
         return this._statusGlobal;
     }
-    set statusGlobal(distance) {
-        this._statusGlobal = distance;
+    set statusGlobal(statusg) {
+        this._statusGlobal = statusg;
     }
     get status() {
         return this._status;
     }
-    set status(distance) {
-        this._status = distance;
+    set status(status) {
+        this._status = status;
+    }
+    get nombreColis() {
+        return this._nombreColis;
+    }
+    set nombreColis(_nombreColis) {
+        this._nombreColis = this._nombreColis;
+    }
+    set setProducts(products) {
+        this.products = products;
+    }
+    get getProducts() {
+        return this.products;
     }
     calculateTotal() {
         // let total: number = 0;
@@ -159,6 +184,9 @@ export class Cargo {
         // });
         // return total;
         return this.products.reduce((total, product) => total + this.calculateAmount(product), 0);
+    }
+    claculPoids() {
+        return this.products.reduce((total, product) => total + product.weight, 0);
     }
     getNbrProduct() {
         return this.products.length;
@@ -205,9 +233,8 @@ export class Cargo {
         return tr;
     }
 }
+Cargo.genrerCode = Math.floor(Math.random() * 1000000000) + 2000000000;
 export class Maritime extends Cargo {
-    products;
-    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
@@ -218,7 +245,7 @@ export class Maritime extends Cargo {
             console.log("Impossible to add");
             return;
         }
-        if (this.products.length === Maritime.max) {
+        if (((this.nombreColis != null) && this.products.length == this.nombreColis) || (this.weigth != null && this.weigth - this.claculPoids() < product.weight)) {
             console.log("Impossible d'ajouter la cargaison est pleine!");
             return;
         }
@@ -239,12 +266,10 @@ export class Maritime extends Cargo {
         else {
             amount = 90 * product.weight * this.distance + 5000;
         }
-        return amount;
+        return amount > 10000 ? amount : 10000;
     }
 }
 export class Air extends Cargo {
-    products;
-    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
@@ -255,7 +280,7 @@ export class Air extends Cargo {
             console.log("Impossible to add");
             return;
         }
-        if (this.products.length === Air.max) {
+        if (((this.weigth != null) && product.weight > this.weigth - this.claculPoids()) || ((this.weigth != null && this.weigth - this.claculPoids() < product.weight))) {
             console.log("Impossible d'ajouter la cargaison est pleine!");
             return;
         }
@@ -273,12 +298,10 @@ export class Air extends Cargo {
         else {
             amount = 1000 * product.weight * this.distance;
         }
-        return amount;
+        return amount > 10000 ? amount : 10000;
     }
 }
 export class Road extends Cargo {
-    products;
-    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
@@ -289,7 +312,7 @@ export class Road extends Cargo {
             console.log("Impossible to add");
             return;
         }
-        if (this.products.length === Road.max) {
+        if ((this.products.length == (this === null || this === void 0 ? void 0 : this.nombreColis)) || (this.weigth != null && this.weigth - this.claculPoids() < product.weight)) {
             console.log("Impossible d'ajouter la cargaison est pleine!");
             return;
         }
@@ -303,6 +326,6 @@ export class Road extends Cargo {
         else {
             amount = 200 * product.weight * this.distance;
         }
-        return amount;
+        return amount > 10000 ? amount : 10000;
     }
 }
