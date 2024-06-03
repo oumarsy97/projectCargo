@@ -15,5 +15,11 @@
     "sweetalert2": "^8.19.1",
     "ts-loader": "^9.5.1",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@types/nodemailer": "^6.4.15",
+    "axios": "^1.7.2",
+    "nodemailer": "^6.9.13",
+    "twilio": "^5.1.0"
   }
 }

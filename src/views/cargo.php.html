@@ -1,5 +1,5 @@
-<main class="text-gray-600 body-font mx-10 h-full mt-4 flex gap-10" id="cargaison">
-    <div class="w-full h-full flex flex-col gap-4">
+<section class="text-gray-600 body-font mx-10 h-full mt-4 flex gap-10 " id="cargaison">
+    <div class=" w-80 h-full flex flex-col gap-4 mx-11">
         <div class="w-full h-full flex flex-col gap-4">
             <h2 class="text-2xl font-bold text-center">Liste des Cargaison</h2>
         </div>
@@ -50,8 +50,8 @@
                         <td class="px-6 py-4"><?= $cargo['_dateArrive']; ?></td>
                         <td class="px-6 py-4 flex items-center justify-center"><img src="<?= $cargo['_statusGlobal'] =='ouvert' ? 'https://cdn-icons-png.flaticon.com/128/9069/9069952.png' : 'https://cdn-icons-png.flaticon.com/128/4503/4503969.png'; ?>" alt="" class="w-5 h-5"></td>
                         <td class="px-6 py-4 text-center"><?= $cargo['_status']; ?></td>
-                        <td class="px-6 py-4 flex items-center justify-center">
-                            <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline"><i class="fa-solid fa-circle-info"></i></a>
+                        <td class="px-6 py-4 flex items-center justify-center" id="detail-<?php echo $cargo['code']; ?>">
+                            <a href="#" class=""><i class="fa-solid fa-circle-info"></i></a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -75,7 +75,7 @@
              
         </div>
        
-        <div class="flex items-center ">
+        <div class=" items-center hidden" id="detail">
             <div class="relative">
               <div class="absolute -left-5 h-full w-6 border-t-2 border-r-2 border-gray-500 rotate-45"></div>
             </div>
@@ -89,7 +89,7 @@
            <div class="flex justify-center w-1/4 h-[200px] sm:hidden md:block " bg-gray-100 id="detailcargo">
             <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 
-            <div class=" shadow-md rounded-md p-6">
+            <div class=" shadow-md rounded-md p-6 hidden">
                 <div class="flex justify-between items-center mb-4">
                     <div class="text-gray-500 text-xl font-bold">Code: 959802985</div>
                 </div>
@@ -135,3 +135,8 @@
             </div>
             
            </div>
+</section>
+          
+<section class="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 hidden" id="sectiondetails">
+
+</section>

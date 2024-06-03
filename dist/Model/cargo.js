@@ -44,6 +44,12 @@ export class Product {
     get owner() {
         return this._owner;
     }
+    get Type() {
+        return this.type;
+    }
+    set Type(value) {
+        this.type = value;
+    }
     //
     info() {
         console.log(`Name: ${this.code}, Weight: ${this.weight}`);
@@ -178,15 +184,20 @@ export class Cargo {
         return this.products;
     }
     calculateTotal() {
-        // let total: number = 0;
-        // this.products.forEach(product => {
-        //     total += this.calculateAmount(product);
-        // });
-        // return total;
         return this.products.reduce((total, product) => total + this.calculateAmount(product), 0);
     }
-    claculPoids() {
-        return this.products.reduce((total, product) => total + product.weight, 0);
+    removeProduit(product) {
+        this.products = this.products.filter((p) => p !== product);
+    }
+    calculPoidsRestant() {
+        if (this === null || this === void 0 ? void 0 : this._weigth) {
+            let poidsrestant = 0;
+            this.products.forEach((product) => {
+                poidsrestant = poidsrestant + product.weight;
+            });
+            return this._weigth - poidsrestant;
+        }
+        return 0;
     }
     getNbrProduct() {
         return this.products.length;
@@ -241,11 +252,15 @@ export class Maritime extends Cargo {
         this._type = "Maritime";
     }
     addProduct(product) {
+        if (this.statusGlobal == "ferme") {
+            console.log("Impossible to add");
+            return;
+        }
         if (product instanceof Fragile) {
             console.log("Impossible to add");
             return;
         }
-        if (((this.nombreColis != null) && this.products.length == this.nombreColis) || (this.weigth != null && this.weigth - this.claculPoids() < product.weight)) {
+        if (((typeof this.nombreColis != 'undefined') && this.products.length == this.nombreColis) || (typeof this.weigth != 'undefined' && this.calculPoidsRestant() < product.weight)) {
             console.log("Impossible d'ajouter la cargaison est pleine!");
             return;
         }
@@ -276,11 +291,15 @@ export class Air extends Cargo {
         this._type = "Aerienne";
     }
     addProduct(product) {
+        if (this.statusGlobal == "ferme") {
+            console.log("Impossible to add");
+            return;
+        }
         if (product instanceof Chemical) {
             console.log("Impossible to add");
             return;
         }
-        if (((this.weigth != null) && product.weight > this.weigth - this.claculPoids()) || ((this.weigth != null && this.weigth - this.claculPoids() < product.weight))) {
+        if (((this.weigth != null) && this.calculPoidsRestant() < product.weight) || ((this.nombreColis != null) && this.products.length == this.nombreColis)) {
             console.log("Impossible d'ajouter la cargaison est pleine!");
             return;
         }
@@ -308,11 +327,15 @@ export class Road extends Cargo {
         this._type = "Terrestre";
     }
     addProduct(product) {
+        if (this.statusGlobal == "ferme") {
+            console.log("Impossible to add");
+            return;
+        }
         if (product instanceof Chemical) {
             console.log("Impossible to add");
             return;
         }
-        if ((this.products.length == (this === null || this === void 0 ? void 0 : this.nombreColis)) || (this.weigth != null && this.weigth - this.claculPoids() < product.weight)) {
+        if ((this.products.length == (this === null || this === void 0 ? void 0 : this.nombreColis)) || (this.weigth != null && this.calculPoidsRestant() < product.weight)) {
             console.log("Impossible d'ajouter la cargaison est pleine!");
             return;
         }

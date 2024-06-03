@@ -10,13 +10,14 @@ export interface owner {
 
 }
 
-type EtatColis = "en attente" | "en cours" | "arrive" | "recuperer"|"perdu"|"archive"|"annule";
+export type EtatColis = "en attente" | "en cours" | "arrive" | "recuperer"|"perdu"|"archive"|"annule";
 export abstract class Product {
   protected code: number;
   protected abstract type: string;
   constructor(protected _libelle: string, protected _weight: number,protected _client : owner,protected _owner: owner,protected _status:EtatColis="en attente") {
     this.code = ++Cargo.genrerCode;
   }
+
   get Code(): number {
     return this.code;
   }
@@ -62,6 +63,13 @@ export abstract class Product {
     return this._owner;
   }
 
+  get Type (): string {
+    return this.type;
+  }
+
+  set Type (value: string) {
+    this.type = value;
+  }
   
   //
   info(): void {
@@ -221,22 +229,27 @@ get type(): string {
   abstract addProduct(product: Product): void;
   abstract calculateAmount(product: Product): number;
   calculateTotal(): number {
-    // let total: number = 0;
-    // this.products.forEach(product => {
-    //     total += this.calculateAmount(product);
-    // });
-    // return total;
+   
     return this.products.reduce(
       (total, product) => total + this.calculateAmount(product),
       0
     );
   }
-  claculPoids(): number {
-    return this.products.reduce(
-      (total, product) => total + product.weight,
-      0
-    );
+  public removeProduit(product: Product): void {
+    this.products = this.products.filter((p) => p !== product);
   }
+  public calculPoidsRestant(): number {
+    if(this?._weigth){
+      let poidsrestant = 0
+    this.products.forEach((product) => {
+      poidsrestant = poidsrestant + product.weight
+      
+    })
+    return this._weigth - poidsrestant;
+  }
+  return 0;
+   }
+
   getNbrProduct(): number {
     return this.products.length;
   }
@@ -292,11 +305,15 @@ export class Maritime extends Cargo {
     this._type = "Maritime";
   }
   addProduct(product: Food | Unbreakable | Chemical): void {
+    if(this.statusGlobal=="ferme"){
+      console.log("Impossible to add");
+      return;
+    }
     if (product instanceof Fragile) {
       console.log("Impossible to add");
       return;
     }
-    if ((( this.nombreColis != null) && this.products.length == this.nombreColis) || (this.weigth != null && this.weigth - this.claculPoids()<product.weight)) {
+    if (((typeof this.nombreColis != 'undefined') && this.products.length == this.nombreColis) || (typeof this.weigth != 'undefined' &&  this.calculPoidsRestant()<product.weight)) {
       console.log("Impossible d'ajouter la cargaison est pleine!");
       return;
     }
@@ -330,11 +347,15 @@ export class Air extends Cargo {
     this._type = "Aerienne";
   }
   addProduct(product: Food | Material): void {
+    if(this.statusGlobal=="ferme"){
+      console.log("Impossible to add");
+      return;
+    }
     if (product instanceof Chemical) {
       console.log("Impossible to add");
       return;
     }
-    if ((( this.weigth !=null) && product.weight > this.weigth - this.claculPoids()) || ((this.weigth != null && this.weigth - this.claculPoids()<product.weight))) {
+    if ((( this.weigth !=null) && this.calculPoidsRestant()<product.weight) || ((this.nombreColis != null) && this.products.length == this.nombreColis) ) {
       console.log("Impossible d'ajouter la cargaison est pleine!");
       return;
     }
@@ -365,11 +386,15 @@ export class Road extends Cargo {
     this._type = "Terrestre";
   }
   addProduct(product: Food | Material): void {
+    if(this.statusGlobal=="ferme"){
+      console.log("Impossible to add");
+      return;
+    }
     if (product instanceof Chemical) {
       console.log("Impossible to add");
       return;
     }
-    if (( this.products.length == this?.nombreColis )|| (this.weigth != null && this.weigth - this.claculPoids()<product.weight)) {
+    if (( this.products.length == this?.nombreColis )|| (this.weigth != null && this.calculPoidsRestant()<product.weight)) {
       console.log("Impossible d'ajouter la cargaison est pleine!");
       return;
     }

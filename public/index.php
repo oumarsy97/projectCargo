@@ -11,10 +11,24 @@
      <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
    <title>Cargo Express</title>
+   <style>
+    @keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-in-from-right {
+  animation: slideInFromRight 3s ease-in-out;
+}
+   </style>
 </head>
 <body>
 <header class="text-gray-800 body-font sticky top-0 z-9999 bg-white">
-  <div class="container mx-auto flex flex-wrap p-6 flex-col md:flex-row items-center shadow-md rounded-lg z-10">
+  <div class="container mx-auto flex flex-wrap p-6 flex-col md:flex-row items-center shadow-md rounded-lg z-10 ">
     <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
@@ -59,15 +73,14 @@
 </header>
 
 <!-- You can open the modal using ID.showModal() method -->
-<dialog id="my_modal_3" class="modal h-auto w-2/4 ">
-  <div class="modal-box h-[500px] w-full">
-    
+<dialog id="my_modal_3" class="modal h-auto w-full ">
+  <div class="modal-box h-full w-full">
     <form method="dialog">
       <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
     </form>
    
-  <div class="container mx-auto p-4 form-control">
-  <div class="">
+  <div class="w-full mx-auto p-4 form-control">
+  <div class="w-full">
  
    <h2 class="text-2xl font-bold mb-4 text-center">Ajout Cargaison</h2>
    </div>
@@ -158,22 +171,19 @@ include "../php/".$page.".php";
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="../node_modules/preline/dist/preline.js"></script>
 <script src="../dist/script.js" type="module"></script>
+<!-- <script src="../dist/Model/mail.js" type="module"></script> -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
      crossorigin=""></script>
      <script>
-      
-       var map = L.map('map').setView([51.505, -0.09], 13);
-       L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-}).addTo(map);
+  var map = L.map('map').setView([30, 0], 2);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '©OpenStreetMap, ©CartoDB'
+  }).addTo(map);
 
+  var depart, arrive, line;
 
-        var depart;
-        var arrive;
-
-        function handleClick(e) {
+  function handleClick(e) {
     const arriv = document.getElementById('to');
     const depar = document.getElementById('from');
 
@@ -206,33 +216,18 @@ include "../php/".$page.".php";
       .catch(error => console.error(error));
   }
 
+  map.on('click', handleClick);
 
-        function calculateDistance() {
-            var distance = depart.getLatLng().distanceTo(arrive.getLatLng()) / 1000;
-           const distanceElement = document.getElementById('distance');
-           distanceElement.value = distance.toFixed(2) ;
-        }
+  document.getElementById('typeChargement').addEventListener('change', function() {
+    document.getElementById('typepoids').classList.toggle('hidden', this.value !== 'poids');
+    document.getElementById('typecolis').classList.toggle('hidden', this.value !== 'colis');
+    document.getElementById('nombreColis').disabled = this.value !== 'colis';
+    document.getElementById('weight').disabled = this.value !== 'poids';
+  });
 
-        function traceDistance(depart, arrive) {
-          //effacer dabord la ligne si il y en a une
-          if (line) {
-            
-            map.removeLayer(line);
-            line = null;
-          }
-          var distance = depart.getLatLng().distanceTo(arrive.getLatLng()) / 1000;
-          var line = L.polyline([depart.getLatLng(), arrive.getLatLng()], { color: 'red' }).addTo(map);
-          return distance;
-        }
-
-        map.on('click', handleClick);
-
-
-     
-       
-    
-       
-    </script>
-
+  document.getElementById('typeproduit')?.addEventListener('change', function() {
+    document.getElementById('divDegre').classList.toggle('hidden', this.value !== 'chimique');
+  });
+</script>
 </body>
 </html>
