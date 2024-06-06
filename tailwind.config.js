@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from "daisyui"
 module.exports = {
   content: [
     "./public/**/*.{html,js,php}",
@@ -11,8 +12,8 @@ module.exports = {
   plugins: [
    // require('@tailwindcss/forms'),
     require('daisyui'),
-    require('flowbite/plugin'),
-    require('./node_modules/preline/plugin'),
+    // require('flowbite/plugin'),
+    // require('./node_modules/preline/plugin'),
 
   ],
 }

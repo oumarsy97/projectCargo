@@ -10,6 +10,9 @@
      crossorigin=""/>
      <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"  rel="stylesheet" />
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+      <link href="https://cdn.jsdelivr.net/npm/daisyui@4.11.1/dist/full.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    <title>Cargo Express</title>
    <style>
     @keyframes slideInFromRight {
@@ -45,25 +48,25 @@
       <a class="mr-5 hover:text-gray-900 " >
         <form action="" method="post">
           <input type="hidden" name="action" value="dashboard">
-          <input type="submit" value="dashboard" class="text-black  font-bold  focus:text-sky-500  text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
+          <input type="submit" value="dashboard" class="text-blue-700  font-bold  focus:text-sky-500  text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
         </a>
       <a class="mr-5 hover:text-gray-900">
       <form action="" method="post">
           <input type="hidden" name="action" value="cargaison">
-          <input type="submit" value="Cargaisons" class="text-black  font-bold   text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
+          <input type="submit" value="Cargaisons" class="text-blue-700  font-bold   text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
         </form>
       </a>
       <a class="mr-5 hover:text-gray-900">
       <form action="" method="post">
           <input type="hidden" name="action" value="produit">
-          <input type="submit" value="Produits" class="text-black font-bold  text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
+          <input type="submit" value="Produits" class="text-blue-700 font-bold  text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
         </form>
       </form>
       </a>
       <a class="mr-5 hover:text-gray-900">
       <form action="" method="post">
           <input type="hidden" name="action" value="client">
-          <input type="submit" value="Clients" class="text-black  font-bold   text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
+          <input type="submit" value="Clients" class="text-blue-700  font-bold   text-xl rounded-lg focus:ring-blue-500   focus:bg-blue-500 hover:bg-blue-500 hover:text-white   h-1/2 p-2">
         </form>
       </a>
       
@@ -156,21 +159,60 @@
 </dialog>
 <?php
 
-$page = 'cargaison';
-if (isset($_REQUEST['action'])) {
+
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {
+  include   '../php/connexion.php';
+  die();
+}else if (isset($_REQUEST['action'])) {
   $page = $_REQUEST['action'];
 }
 
-if(file_exists('../php/'.$page.'.php')) {
-include "../php/".$page.".php";
-}
+
+
+
+// if(isset($_POST['email']) && $_POST['email'] !='' && isset($_POST['password']) ){
+//   //dd($_POST);
+//   $error = 0;
+//   unset($_SESSION['Errmes']);
+//   if(!validateEmail($_POST['email'])){
+//       $_SESSION['Erremail'] = 'Email formats invalides';
+//       $error = 1;
+//   }else{
+//       $_SESSION['email'] = $_POST['email'];
+//       unset($_SESSION['Erremail']);
+//   }
+//   if($_POST['password'] == ''){
+//       $_SESSION['Errpassword'] = 'Mot de passe requis';
+//       $error = 1;
+//   }
+//   $login = $_POST['email'];
+//   $password = $_POST['password'];
+//   $user = getUser($login, $password);
+//   if($user){
+//     $_SESSION['user'] = $user;
+//     header('Location: ../php/connexion.php');
+//   }
+
+// }
+ // dd($user);
+ $page = 'cargaison';
+ if(isset($_REQUEST['action'])) {
+   $page = $_REQUEST['action'];
+ }
+ if(file_exists('../php/'.$page.'.php')) {
+ include "../php/".$page.".php";
+ }
 ?>
 
 </main>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="../node_modules/preline/dist/preline.js"></script>
 <script src="../dist/script.js" type="module"></script>
+<script type="text/javascript"
+src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 <!-- <script src="../dist/Model/mail.js" type="module"></script> -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="

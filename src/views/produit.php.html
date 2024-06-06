@@ -1,12 +1,46 @@
-<section class="text-gray-600 body-font mx-auto px-4 h-full w-full mt-4 flex flex-col items-center justify-center " id="sectionproduit">
-  <header class="bg-blue-600 text-white px-6 py-3   mx-[400px]">
+<section class="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 " id="sectionlesproduits">
+<header class="bg-blue-600 text-white px-6 py-3 rounded-t-lg flex justify-between">
+  <h2 class="text-xl font-semibold flex items-center">
+    <i class="fas fa-box-open mr-2"></i> Liste des produits
+ </h2>
+  <button class="bg-white hover:bg-blue-700 hover:text-white text-blue-600 font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline" type="button" id="ajoterproduit">Ajouter un produit</button>
+</header>
+<div class="overflow-x-auto">
+  <div class="flex flex-col">
+  <table class="min-w-full divide-y divide-gray-200">
+         <thead>
+            <tr>
+               <th class="px-6 py-3 bg-gray-50 text-left  leading-4 font-medium text-gray-500 uppercase tracking-wider">Code</th>
+               <th class="px-6 py-3 bg-gray-50 text-left  leading-4 font-medium text-gray-500 uppercase tracking-wider">libele</th>
+               <th class="px-6 py-3 bg-gray-50 text-left  leading-4 font-medium text-gray-500 uppercase tracking-wider">Type</th>
+               <th class="px-6 py-3 bg-gray-50 text-left  leading-4 font-medium text-gray-500 uppercase tracking-wider">Client</th>
+               <th class="px-6 py-3 bg-gray-50 text-left  leading-4 font-medium text-gray-500 uppercase tracking-wider">Poids</th>
+               <th class="px-6 py-3 bg-gray-50 text-left  leading-4 font-medium text-gray-500 uppercase tracking-wider">Destinataire</th>
+               <th class="px-6 py-3 bg-gray-50 text-left  leading-4 font-medium text-gray-500 uppercase tracking-wider">Etat</th>
+               <th class="px-6 py-3 bg-gray-50 text-left  leading-4 font-medium text-gray-500 uppercase tracking-wider">Action</th>
+           </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200" id="listproduits">
+           
+
+            
+            
+          </tbody>
+        </table>
+   
+
+</div>
+</div>
+</section>
+<section class="text-gray-600 body-font  px-4 h-full  mt-4  flex-col items-center justify-center hidden" id="sectionproduit">
+  <header class="bg-blue-600 text-white px-6 py-3 rounded-t-lg ">
     <h2 class="text-xl font-semibold flex items-center">
       <i class="fas fa-box-open mr-2"></i> Enregistrer un produit
     </h2>
   </header>
   <div class="w-full py-3  items-center justify-center " >
   <form action="" method="post" id="formProduit">
-    <div class="flex gap-2 w-full justify-between mx-40 my-4" id="modal">
+    <div class="flex gap-2 w-full justify-between  my-4" id="modal">
 
     <!-- Info client -->
       <section class="bg-white shadow-md rounded-lg overflow-hidden w-full ">
@@ -270,12 +304,7 @@
 
   </section>
 <script>
-  document?.getElementById('etatSelect')?.addEventListener('change', function() {
-    let badge = document.getElementById('statusBadge');
-    badge.textContent = this.value.charAt(0).toUpperCase() + this.value.slice(1);
-    badge.classList.toggle('bg-green-500', this.value === 'ouvert');
-    badge.classList.toggle('bg-red-500', this.value === 'ferme');
-  });
+  
 </script>
 </div>
 

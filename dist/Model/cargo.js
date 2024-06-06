@@ -1,5 +1,11 @@
 let x;
 export class Product {
+    _libelle;
+    _weight;
+    _client;
+    _owner;
+    _status;
+    code;
     constructor(_libelle, _weight, _client, _owner, _status = "en attente") {
         this._libelle = _libelle;
         this._weight = _weight;
@@ -56,6 +62,7 @@ export class Product {
     }
 }
 export class Food extends Product {
+    type;
     constructor(libelle, weight, client, owner, _status = "en attente") {
         super(libelle, weight, client, owner);
         this.type = "food";
@@ -67,18 +74,22 @@ export class Material extends Product {
     }
 }
 export class Unbreakable extends Material {
+    type;
     constructor(libelle, weight, client, owner, _status = "en attente") {
         super(libelle, weight, client, owner);
         this.type = "unbreakable";
     }
 }
 export class Fragile extends Material {
+    type;
     constructor(libelle, weight, client, owner, _status = "en attente") {
         super(libelle, weight, client, owner);
         this.type = "fragile";
     }
 }
 export class Chemical extends Product {
+    _toxicity;
+    type;
     constructor(libelle, weight, client, owner, _toxicity, _status = "en attente") {
         super(libelle, weight, client, owner);
         this._toxicity = _toxicity;
@@ -100,6 +111,17 @@ const Idexist = (id, data) => {
     return false;
 };
 export class Cargo {
+    _distance;
+    _from;
+    _to;
+    _dateDepart;
+    _dateArrive;
+    _weigth;
+    _nombreColis;
+    _statusGlobal;
+    _status;
+    static genrerCode = Math.floor(Math.random() * 1000000000) + 2000000000;
+    code;
     constructor(_distance, _from, _to, _dateDepart, _dateArrive, _weigth, _nombreColis, _statusGlobal = "ouvert", _status = "en attente") {
         this._distance = _distance;
         this._from = _from;
@@ -190,7 +212,7 @@ export class Cargo {
         this.products = this.products.filter((p) => p !== product);
     }
     calculPoidsRestant() {
-        if (this === null || this === void 0 ? void 0 : this._weigth) {
+        if (this?._weigth) {
             let poidsrestant = 0;
             this.products.forEach((product) => {
                 poidsrestant = poidsrestant + product.weight;
@@ -244,8 +266,9 @@ export class Cargo {
         return tr;
     }
 }
-Cargo.genrerCode = Math.floor(Math.random() * 1000000000) + 2000000000;
 export class Maritime extends Cargo {
+    products;
+    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
@@ -285,6 +308,8 @@ export class Maritime extends Cargo {
     }
 }
 export class Air extends Cargo {
+    products;
+    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
@@ -321,6 +346,8 @@ export class Air extends Cargo {
     }
 }
 export class Road extends Cargo {
+    products;
+    _type;
     constructor(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal = "ouvert", status = "en attente") {
         super(distance, from, to, dateDepart, dateArrive, weigth, nombreColis, statusGlobal, status);
         this.products = [];
@@ -335,7 +362,7 @@ export class Road extends Cargo {
             console.log("Impossible to add");
             return;
         }
-        if ((this.products.length == (this === null || this === void 0 ? void 0 : this.nombreColis)) || (this.weigth != null && this.calculPoidsRestant() < product.weight)) {
+        if ((this.products.length == this?.nombreColis) || (this.weigth != null && this.calculPoidsRestant() < product.weight)) {
             console.log("Impossible d'ajouter la cargaison est pleine!");
             return;
         }
