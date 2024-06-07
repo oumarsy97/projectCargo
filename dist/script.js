@@ -437,7 +437,7 @@ const EtatColis = (carg) => {
                                     cargo.getProducts.forEach((produit) => {
                                         if (produit.Code == codeProduit) {
                                             produit.status = 'perdu';
-                                            // Send({cargo,'message':'Votre Colis  à été perdu ,Nous sommes désoler pour le moment'});
+                                            Send({ cargo, 'message': 'Votre Colis  à été perdu ,Nous sommes désoler pour le moment' });
                                         }
                                     });
                                 }
@@ -521,7 +521,7 @@ const chagerEtats = () => {
                             cargo.status = 'perdu';
                             cargo.getProducts.forEach((produit) => {
                                 produit.status = 'perdu';
-                                //Send ({cargo,'message':'Votre Colis  à été perdu ,Nous sommes désoler pour le moment'});
+                                Send({ cargo, 'message': 'Votre Colis  à été perdu ,Nous sommes désoler pour le moment' });
                             });
                         }
                         afficherNotification("la cargaison est perdu ", "red-500", 4000);
@@ -591,7 +591,7 @@ const chagerEtats = () => {
                             cargo.status = 'arrive';
                             cargo.getProducts.forEach((produit) => {
                                 produit.status = 'arrive';
-                                // Send({cargo,'message':'Votre Colis  à été bien enregisté votre code est : ' +produit.Code+' est la date de départ est : '+carg.dateDepart+' Merci pour votre confiance <br> Vous pouvez suivre votre colis via ce lien : www.oumar.sy:8888/CargoProject/public/index.php' });
+                                Send({ cargo, 'message': 'Votre Colis  à été bien enregisté votre code est : ' + produit.Code + ' est la date de départ est : ' + carg.dateDepart + ' Merci pour votre confiance <br> Vous pouvez suivre votre colis via ce lien : www.oumar.sy:8888/CargoProject/public/index.php' });
                             });
                         }
                         afficherNotification("la cargaison est arrivée", "green-500", 4000);
@@ -1512,7 +1512,7 @@ addproduit?.addEventListener("click", (event) => {
                         cargo.addProduct(prod);
                         console.log('cargo', cargo);
                         cargochoisi = cargo;
-                        // Send({cargo,'message':'Votre Colis  à été bien enregisté votre code est : ' +prod.Code+' est la date de départ est : '+cargo.dateDepart+' Merci pour votre confiance Vous pouvez suivre votre colis via ce lien : www.oumar.sy:8888/CargoProject/public/index.php' });
+                        Send({ cargo, 'message': 'Votre Colis  à été bien enregisté votre code est : ' + prod.Code + ' est la date de départ est : ' + cargo.dateDepart + ' Merci pour votre confiance Vous pouvez suivre votre colis via ce lien : www.oumar.sy:8888/CargoProject/public/index.php' });
                     }
                     nexCargo.push(cargo);
                 });
