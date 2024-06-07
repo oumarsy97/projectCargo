@@ -1,6 +1,33 @@
 {
     "cargo": [
         {
+            "_distance": 1419.95,
+            "_from": "Alg\u00e9rie",
+            "_to": "Libye",
+            "_dateDepart": "2024-06-07",
+            "_dateArrive": "2024-06-08",
+            "_weigth": null,
+            "_statusGlobal": "ouvert",
+            "_status": "en attente",
+            "code": 2787345883,
+            "products": [],
+            "_type": "Terrestre"
+        },
+        {
+            "_distance": 3130.75,
+            "_from": "Mauritanie",
+            "_to": "Tchad",
+            "_dateDepart": "2024-06-06",
+            "_dateArrive": "2024-06-07",
+            "_weigth": 3,
+            "_nombreColis": null,
+            "_statusGlobal": "ouvert",
+            "_status": "en attente",
+            "code": 2787345882,
+            "products": [],
+            "_type": "Maritime"
+        },
+        {
             "_distance": 3622.26,
             "_from": "Tchad",
             "_to": "S\u00e9n\u00e9gal",
@@ -30,7 +57,7 @@
                         "phone": "774991128"
                     },
                     "_status": "arrive",
-                    "code": 2728743703,
+                    "code": 2075962427,
                     "type": "food"
                 }
             ],
@@ -108,7 +135,7 @@
                         "phone": "781807229"
                     },
                     "_status": "arrive",
-                    "code": 2728743708,
+                    "code": 2075962432,
                     "type": "food"
                 }
             ],
@@ -144,7 +171,7 @@
                         "phone": "781807229"
                     },
                     "_status": "arrive",
-                    "code": 2728743710,
+                    "code": 2075962434,
                     "type": "unbreakable"
                 },
                 {
@@ -165,7 +192,7 @@
                         "phone": "781807229"
                     },
                     "_status": "arrive",
-                    "code": 2728743711,
+                    "code": 2075962435,
                     "type": "food"
                 }
             ],
@@ -200,7 +227,7 @@
                         "phone": "763238566"
                     },
                     "_status": "perdu",
-                    "code": 2728743713,
+                    "code": 2075962437,
                     "type": "unbreakable"
                 },
                 {
@@ -221,7 +248,7 @@
                         "phone": "781807229"
                     },
                     "_status": "perdu",
-                    "code": 2728743714,
+                    "code": 2075962438,
                     "type": "food"
                 }
             ],
@@ -258,12 +285,12 @@
         {
             "_distance": 11431.17,
             "_from": "Niger",
-            "_to": "\u00c9tats-Unis d'Am\u00e9rique",
+            "_to": "Canada",
             "_dateDepart": "2024-05-29",
             "_dateArrive": "2024-05-31",
             "_weigth": 5,
             "_nombreColis": null,
-            "_statusGlobal": "ferme",
+            "_statusGlobal": "ouvert",
             "_status": "arrive",
             "code": 801948891,
             "products": [
@@ -285,7 +312,7 @@
                         "phone": "781807229"
                     },
                     "_status": "arrive",
-                    "code": 2728743718,
+                    "code": 2075962442,
                     "type": "unbreakable"
                 }
             ],

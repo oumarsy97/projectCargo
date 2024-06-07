@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entreprise de Gestion de Cargaisons</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-500 p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#home" class="text-white text-lg font-semibold">Cargaisons Express</a>
+            <div>
+                <a href="#home" class="text-white mx-2">Accueil</a>
+                <a href="#connexion" class="text-white mx-2" onclick="document.getElementById('connexion').classList.remove('hidden')">Connexion</a>
+                <a href="#services" class="text-white mx-2">Services</a>
+                <a href="#testimonials" class="text-white mx-2">Témoignages</a>
+                <a href="#contact" class="text-white mx-2">Contact</a>
+                <a href="#recherche" class="text-white mx-2" onclick="document.getElementById('recherche').classList.remove('hidden')">Recherche</a>
+            </div>
+        </div>
+    </nav>
+    <section class="w-1/3 bg-white  rounded px-8 pt-6 pb-8 mb-4 hidden " id="connexion">
+        <header class="bg-blue-600 text-white px-6 py-3 rounded-t-lg" >
+          <h1 class="text-3xl font-bold mb-4"><i class="fas fa-sign-in-alt mr-2"></i>Connexion</h1>
+      
+        </header>
+        <div class="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <form action="" method="post" id="formConnexion">
+            <div class="form-control mt-4">
+              <div>
+                <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                <input type="email" id="emailuser" name="email" placeholder="Votre email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <p id="emailError" class="text-red-500 text-xs mt-1 hidden">Email est obligatoire</p>
+              </div>
+              <div>
+                <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Mot de passe</label>
+                <input type="password" id="password" name="password" placeholder="Votre mot de passe" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" autocomplete="new-password" type="password">
+                <p id="passwordError" class="text-red-500 text-xs mt-1 hidden">Mot de passe est obligatoire</p>
+              </div>
+            </div>
+            <div class="p-6">
+              <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Se connecter</button>
+            </div>
+          </form>
+        </div>
+      
+        <div id="message" class="text-center text-red-500 text-xs hidden mt-4 mb-4 p-4 bg-red-100 rounded"></div>
+      </section>
+
+      <section class="w-full bg-white  rounded px-8 pt-6 pb-8 mb-4 " id="recherche">
+        <!-- entrer le code  -->
+        <header class="bg-blue-600 text-white px-6 py-3 rounded-t-lg">
+          <h1 class="text-3xl font-bold mb-4">Recherche</h1>
+        </header>
+        <div class=" bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex gap-4 ms-auto">
+            <div class="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+                <form action="" method="post" id="formRecherche" class="w-1/3">
+                  <div class="form-control mt-4">
+                    <div>
+                      <label for="code" class="block text-gray-700 text-sm font-bold mb-2">Veillez entrer le code du produit</label>
+                      <input type="number" min="0" id="codeproduit" name="code" placeholder="Code" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                      <p id="codeError" class="text-red-500 text-xs mt-1 hidden">Code est obligatoire</p>
+                    </div>
+                  </div>
+                  <div class="p-6">
+                    <button type="button" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Rechercher</button>
+                  </div>
+                </form>
+            </div>
+          <div class="w-full bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 h-[300px]" id="detailsTrajet">
+
+          </div>
+        </div>
+    </section>
+   
+    <!-- Hero Section -->
+    <section id="home" class="bg-cover bg-center h-screen" style="background-image: url('http://via.placeholder.com/1920x1080');">
+        <div class="container mx-auto h-full flex justify-center items-center">
+            <div class="text-center text-white">
+                <h1 class="text-5xl font-bold mb-4">Votre Solution de Transport Global</h1>
+                <p class="text-xl mb-6">Nous gérons vos cargaisons maritimes, aériennes et terrestres avec expertise et fiabilité.</p>
+                <a href="#services" class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded">Découvrez nos services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-12">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold mb-6">Nos Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded shadow-md">
+                    <img src="https://via.placeholder.com/150" alt="Transport Maritime" class="mx-auto mb-4">
+                    <h3 class="text-xl font-semibold">Transport Maritime</h3>
+                    <p>Solutions de transport maritime fiables et sécurisées pour vos marchandises.</p>
+                </div>
+                <div class="bg-white p-6 rounded shadow-md">
+                    <img src="https://via.placeholder.com/150" alt="Transport Aérien" class="mx-auto mb-4">
+                    <h3 class="text-xl font-semibold">Transport Aérien</h3>
+                    <p>Livraisons rapides et sécurisées par voie aérienne pour vos cargaisons urgentes.</p>
+                </div>
+                <div class="bg-white p-6 rounded shadow-md">
+                    <img src="https://via.placeholder.com/150" alt="Transport Terrestre" class="mx-auto mb-4">
+                    <h3 class="text-xl font-semibold">Transport Terrestre</h3>
+                    <p>Réseau routier étendu pour une distribution efficace de vos produits.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-12 bg-gray-100">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold mb-6">Témoignages</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded shadow-md">
+                    <p>"Cargaisons Express a livré notre marchandise rapidement et en parfait état. Nous sommes très satisfaits de leur service."</p>
+                    <h3 class="text-xl font-semibold mt-4">Jean Dupont</h3>
+                    <p class="text-gray-600">Directeur Logistique, Entreprise XYZ</p>
+                </div>
+                <div class="bg-white p-6 rounded shadow-md">
+                    <p>"Le suivi des cargaisons est excellent. Nous avons pu suivre notre envoi du début à la fin."</p>
+                    <h3 class="text-xl font-semibold mt-4">Marie Curie</h3>
+                    <p class="text-gray-600">Responsable Achats, Entreprise ABC</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl font-semibold mb-6">Contactez-nous</h2>
+            <form action="mailto:info@cargaisons-express.com" method="post" enctype="text/plain" class="bg-white p-6 rounded shadow-md max-w-lg mx-auto">
+                <div class="mb-4">
+                    <label for="name" class="block text-gray-700">Nom</label>
+                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded">
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border rounded">
+                </div>
+                <div class="mb-4">
+                    <label for="message" class="block text-gray-700">Message</label>
+                    <textarea id="message" name="message" rows="4" class="w-full px-4 py-2 border rounded"></textarea>
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Envoyer</button>
+            </form>
+        </div>
+    </section>
+
+
+
+
+    <!-- Footer -->
+    <footer class="bg-blue-500 p-4 mt-8 text-white text-center">
+        &copy; 2024 Cargaisons Express. Tous droits réservés.
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="../node_modules/preline/dist/preline.js"></script>
+<script src="../dist/script.js" type="module"></script>
+<script type="text/javascript"
+src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
+<!-- <script src="../dist/Model/mail.js" type="module"></script> -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+<script>
+  const formRecherche = document.getElementById('formRecherche');
+  const codeError = document.getElementById('codeError');
+  const codeproduit = document.getElementById('codeproduit');
+  const button = formRecherche.querySelector('button');
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    const code = codeproduit.value;
+    if (code == '') {
+      codeError.classList.remove('hidden');
+      codeError.classList.add('block');
+    } else {
+      codeError.classList.remove('block');
+      codeError.classList.add('hidden');
+
+      const GetData = async () => {
+        try {
+          const response = await fetch("../php/data.php");
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          const data = await response.json();
+          return data.cargo;
+        } catch (error) {
+          console.error('There has been a problem with your fetch operation:', error);
+        }
+      };
+     let depart, arrive, line;
+     
+      async function fetchData() {
+        try {
+            const cargo = await GetData();
+            cargo.forEach((element) => {
+                element.products.forEach((product) => {
+                    if (product.code == code) {
+                    depart = element._from;
+                    arrive = element._to;
+                    // Vérifiez que les coordonnées existent
+                    if (depart && arrive && depart.lat != null && depart.lng != null && arrive.lat != null && arrive.lng != null) {
+                        // Ajouter les marqueurs de départ et d'arrivée
+                        const departMarker = L.marker([depart.lat, depart.lng]).addTo(map)
+                            .bindPopup(depart.name);
+                        const arriveMarker = L.marker([arrive.lat, arrive.lng]).addTo(map)
+                            .bindPopup(arrive.name);
+
+                        // Tracer la ligne entre les points de départ et d'arrivée
+                        const line = L.polyline([[depart.lat, depart.lng], [arrive.lat, arrive.lng]], {
+                            color: 'indigo',
+                            weight: 3,
+                            opacity: 0.7,
+                            dashArray: '10, 10'
+                        }).addTo(map);
+
+                        // Ajuster la carte pour inclure les marqueurs et la ligne
+                        map.fitBounds(line.getBounds(), { padding: [50, 50] });
+                    } else {
+                        console.error('Invalid coordinates:', depart, arrive);
+                    }
+                }
+          
+                })
+            })
+
+        } catch (error) {
+          console.error('There has been a problem with your fetch operation:', error);
+        }
+      }
+
+      fetchData();
+    }
+
+   
+  });
+
+  
+
+  var map = L.map('detailsTrajet').setView([30, 0], 2);
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '©OpenStreetMap, ©CartoDB'
+  }).addTo(map);
+
+  var depart, arrive, line;
+
+  function handleClick(e) {
+    const arriv = document.getElementById('to');
+    const depar = document.getElementById('from');
+
+    var lat = e.latlng.lat;
+    var lng = e.latlng.lng;
+    var url = 'https://nominatim.openstreetmap.org/reverse?format=json&lat=' + lat + '&lon=' + lng;
+
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        var country = data.address.country || "Inconnu";
+        if (!depart || depar.value === "") {
+          if (depart) map.removeLayer(depart);
+          depar.value = country;
+          depart = L.marker([lat, lng], {icon: L.divIcon({className: 'fas fa-plane-departure text-3xl text-blue-500'})}).addTo(map);
+        } else if (!arrive || arriv.value === "") {
+          if (arrive) map.removeLayer(arrive);
+          arriv.value = country;
+          arrive = L.marker([lat, lng], {icon: L.divIcon({className: 'fas fa-plane-arrival text-3xl text-green-500'})}).addTo(map);
+        }
+        if (depart && arrive) {
+          if (line) map.removeLayer(line);
+          var latlngs = [depart.getLatLng(), arrive.getLatLng()];
+          line = L.polyline(latlngs, {color: 'indigo', weight: 3, opacity: 0.7, dashArray: '10, 10'}).addTo(map);
+          map.fitBounds(line.getBounds(), {padding: [50, 50]});
+          var distance = (depart.getLatLng().distanceTo(arrive.getLatLng()) / 1000).toFixed(2);
+          document.getElementById('distance').value = distance;
+        }
+      })
+      .catch(error => console.error(error));
+  }
+
+  map.on('click', handleClick);
+
+ 
+</script>
+</body>
+</html>

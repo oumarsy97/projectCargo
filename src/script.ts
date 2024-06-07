@@ -1,3 +1,4 @@
+
 import { Air, Maritime, Road,Cargo, Product, Food, Material, Unbreakable, Chemical, Fragile,owner,ToxicityRange, EtatGlobal, EtatColis, EtatCargo } from "./Model/cargo.js";
 // const air = new Air(
 //   10,
@@ -20,14 +21,14 @@ import { Air, Maritime, Road,Cargo, Product, Food, Material, Unbreakable, Chemic
 
 
 
-const GetData = async (): Promise<Icargo[]> => {
+export const GetData = async (): Promise<Icargo[]> => {
   const response = await fetch("../php/data.php");
   const data = await response.json();
   return data.cargo;
 }
 
   const dt = await GetData();
-  var Cargos:Cargo[] = [];
+ export var Cargos:Cargo[] = [];
 dt.forEach((cargo: any) => {
  switch(cargo._type) {
    case "Maritime":
@@ -695,7 +696,7 @@ idchangeEtats.forEach(id => {
           cargo.status = 'perdu';
           cargo.getProducts.forEach((produit) => {
             produit.status = 'perdu';
-           // Send({cargo,'message':'Votre Colis  à été perdu ,Nous sommes désoler pour le moment'});
+           //Send ({cargo,'message':'Votre Colis  à été perdu ,Nous sommes désoler pour le moment'});
           })
           
         }
@@ -1058,7 +1059,7 @@ const save = (data: Cargo[]) => {
 
 const typeChargement = document.getElementById("typeChargement") as HTMLSelectElement;
 
-typeChargement.addEventListener("change", (event) => {
+typeChargement?.addEventListener("change", (event) => {
   const typepoids = document.getElementById("typepoids") as HTMLInputElement;
   const typecolis = document.getElementById("typecolis") as HTMLInputElement;
   
@@ -1090,9 +1091,9 @@ const removeHidden = function(id: string) {
   }
 };
 const formCargo = document.getElementById("formCargo") as HTMLFormElement;
-const submitButton = formCargo.querySelector("button[type='button']") as HTMLButtonElement;
+const submitButton = formCargo?.querySelector("button[type='button']") as HTMLButtonElement;
 
-submitButton.addEventListener("click", (event) => {
+submitButton?.addEventListener("click", (event) => {
   event.preventDefault();
  
   const formData = new FormData(formCargo);
@@ -1280,7 +1281,7 @@ const m = new Maritime(
 
 
 const filter = document.querySelector("#search") as HTMLInputElement;
-filter.addEventListener("input", (event) => {
+filter?.addEventListener("input", (event) => {
   const value = (event.target as HTMLInputElement).value;
   const tbody = document.querySelector('tbody') as unknown as HTMLTableElement;
   //hidden les ligne non correspondant au filtre
@@ -1587,7 +1588,7 @@ const cargoduProduit = (code:number) :Cargo=> {
 }
 const listeProduit = () => {
  
-  const listproduits = document.getElementById("listproduits")! ;
+  const listproduits = document.getElementById("listproduits")! as HTMLElement; ;
   console.log(listproduits);
   
   produits().forEach(product => {

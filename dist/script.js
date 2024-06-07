@@ -15,13 +15,13 @@ import { Air, Maritime, Road, Food, Unbreakable, Chemical, Fragile } from "./Mod
 //   client,
 //   client
 // )
-const GetData = async () => {
+export const GetData = async () => {
     const response = await fetch("../php/data.php");
     const data = await response.json();
     return data.cargo;
 };
 const dt = await GetData();
-var Cargos = [];
+export var Cargos = [];
 dt.forEach((cargo) => {
     switch (cargo._type) {
         case "Maritime":
@@ -521,7 +521,7 @@ const chagerEtats = () => {
                             cargo.status = 'perdu';
                             cargo.getProducts.forEach((produit) => {
                                 produit.status = 'perdu';
-                                // Send({cargo,'message':'Votre Colis  à été perdu ,Nous sommes désoler pour le moment'});
+                                //Send ({cargo,'message':'Votre Colis  à été perdu ,Nous sommes désoler pour le moment'});
                             });
                         }
                         afficherNotification("la cargaison est perdu ", "red-500", 4000);
@@ -833,7 +833,7 @@ const save = (data) => {
     });
 };
 const typeChargement = document.getElementById("typeChargement");
-typeChargement.addEventListener("change", (event) => {
+typeChargement?.addEventListener("change", (event) => {
     const typepoids = document.getElementById("typepoids");
     const typecolis = document.getElementById("typecolis");
     if (typeChargement.value === "colis") {
@@ -860,8 +860,8 @@ const removeHidden = function (id) {
     }
 };
 const formCargo = document.getElementById("formCargo");
-const submitButton = formCargo.querySelector("button[type='button']");
-submitButton.addEventListener("click", (event) => {
+const submitButton = formCargo?.querySelector("button[type='button']");
+submitButton?.addEventListener("click", (event) => {
     event.preventDefault();
     const formData = new FormData(formCargo);
     const data = Object.fromEntries(formData);
@@ -1000,7 +1000,7 @@ submitButton.addEventListener("click", (event) => {
 //   displayDataCargo(itemparpage,page);
 // });
 const filter = document.querySelector("#search");
-filter.addEventListener("input", (event) => {
+filter?.addEventListener("input", (event) => {
     const value = event.target.value;
     const tbody = document.querySelector('tbody');
     //hidden les ligne non correspondant au filtre
@@ -1261,6 +1261,7 @@ const cargoduProduit = (code) => {
 };
 const listeProduit = () => {
     const listproduits = document.getElementById("listproduits");
+    ;
     console.log(listproduits);
     produits().forEach(product => {
         listproduits.innerHTML += modelProduits(product);
